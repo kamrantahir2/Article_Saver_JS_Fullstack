@@ -21,3 +21,17 @@ let articles = [
     favourite: true,
   },
 ];
+
+app.get("/", (request, response) => {
+  response.send("<h1>Hello World!</h1>");
+});
+
+app.get("/api/articles", (request, response) => {
+  response.json(articles);
+});
+
+const PORT = 3001;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
