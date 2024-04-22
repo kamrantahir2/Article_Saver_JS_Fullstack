@@ -81,6 +81,12 @@ app.post("/api/articles", (request, response) => {
   response.json(article);
 });
 
+const unkownEndpoint = (request, response) => {
+  response.status(404).send({ error: "unknown endpoint" });
+};
+
+app.use(unkownEndpoint);
+
 const PORT = 3001;
 
 app.listen(PORT, () => {
