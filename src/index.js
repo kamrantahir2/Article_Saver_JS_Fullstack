@@ -33,6 +33,17 @@ app.get("/api/articles", (request, response) => {
   response.json(articles);
 });
 
+app.get("/api/articles/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const article = articles.find((article) => article.id === id);
+
+  if (article) {
+    response.send(article);
+  } else {
+    response.status(404).end();
+  }
+});
+
 const PORT = 3001;
 
 app.listen(PORT, () => {
