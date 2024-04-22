@@ -44,6 +44,12 @@ app.get("/api/articles/:id", (request, response) => {
   }
 });
 
+app.delete("/api/articles/:id", (request, response) => {
+  const id = Number(request.params.id);
+  articles = articles.filter((a) => a.id !== id);
+  response.status(204).end();
+});
+
 const PORT = 3001;
 
 app.listen(PORT, () => {
