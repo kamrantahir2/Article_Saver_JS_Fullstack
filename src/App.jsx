@@ -17,7 +17,10 @@ function App() {
     <>
       <div>
         {articles.map((a) => (
-          <h3 key={a.title}>{a.title}</h3>
+          <div key={a.id}>
+            <h3>{a.title}</h3>
+            <h4>{a.id}</h4>
+          </div>
         ))}
       </div>
     </>
