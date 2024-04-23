@@ -49,17 +49,16 @@ app.post("/api/articles", (request, response) => {
     });
   }
 
-  const article = {
-    id: generateId(),
+  const article = new Article({
     title: body.title,
     description: body.description,
     url: body.url,
     favourite: Boolean(body.favourite) || false,
-  };
+  });
 
-  articles = articles.concat(article);
-
-  response.json(article);
+  article.save().then((savedArticle) => {
+    response.json(savedArticle);
+  });
 });
 
 const unkownEndpoint = (request, response) => {
