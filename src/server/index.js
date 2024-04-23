@@ -24,14 +24,19 @@ app.get("/api/articles", (request, response) => {
 });
 
 app.get("/api/articles/:id", (request, response) => {
-  const id = Number(request.params.id);
-  const article = articles.find((article) => article.id === id);
-
-  if (article) {
-    response.send(article);
-  } else {
-    response.status(404).end();
-  }
+  const id = request.params.id;
+  Article.findById(id)
+    .then((article) => {
+      if (article) {
+        response.json(article);
+      } else {
+        response.status(404).end();
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      response.status(500).end();
+    });
 });
 
 app.delete("/api/articles/:id", (request, response) => {
