@@ -24,6 +24,20 @@ const article = new Article({
   favourite: true,
 });
 
+// Article.find({}).then((result) => {
+//   result.forEach((article) => {
+//     console.log(article);
+//   });
+//   mongoose.connection.close();
+// });
+
+Article.find({ favourite: true }).then((result) => {
+  result.forEach((a) => {
+    console.log(a);
+  });
+  mongoose.connection.close();
+});
+
 // article.save().then((result) => {
 //   console.log("article saved!");
 //   mongoose.connection.close();
