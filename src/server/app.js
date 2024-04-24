@@ -5,6 +5,7 @@ import articlesRouter from "./controllers/articles.js";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
+import middleware from "./utils/middleware.js";
 
 const url = process.env.MONGODB_URI;
 
@@ -21,27 +22,13 @@ mongoose
 
 // MIDDLEWARE FUNCTIONS
 
-const unkownEndpoint = (request, response) => {
-  response.status(404).send({ error: "unknown endpoint" });
-};
-
-const errorHandler = (error, request, response, next) => {
-  console.error(error.message);
-
-  if (error.name === "CastError") {
-    return response.status(400).send({ error: "malformatted id" });
-  } else if (error.name === "ValidationError") {
-    return response.status(400).json({ error: error.message });
-  }
-};
-
 app.use(cors());
 app.use(express.static("dist"));
 app.use(express.json());
 
 app.use("/api/articles", articlesRouter);
 
-app.use(unkownEndpoint);
-app.use(errorHandler);
+app.use(middleware.unkownEndpoint);
+app.use(middleware.errorHandler);
 
 export default app;
