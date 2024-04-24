@@ -18,11 +18,13 @@ mongoose
 const articleSchema = new mongoose.Schema({
   title: {
     type: String,
+    minLength: 3,
     required: true,
   },
   description: String,
   url: {
     type: String,
+    minLength: 3,
     required: true,
   },
   favourite: Boolean,

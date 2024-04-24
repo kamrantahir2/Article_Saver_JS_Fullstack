@@ -73,6 +73,12 @@ app.put("/api/articles/:id", (request, response, next) => {
   const body = request.body;
   const id = request.params.id;
 
+  if (!body.title || !body.url) {
+    return response.status(400).json({
+      error: "missing content",
+    });
+  }
+
   const article = {
     title: body.title,
     description: body.description,
