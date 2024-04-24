@@ -2,19 +2,6 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
-const url = process.env.MONGODB_URI;
-
-mongoose.set("strictQuery", false);
-
-mongoose
-  .connect(url)
-  .then((result) => {
-    console.log("conneected to MongoDB");
-  })
-  .catch((error) => {
-    console.log("error connecting to MongoDB: ", error.message);
-  });
-
 const articleSchema = new mongoose.Schema({
   title: {
     type: String,

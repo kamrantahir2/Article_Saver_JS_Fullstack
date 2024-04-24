@@ -13,6 +13,12 @@ function App() {
     });
   }, []);
 
+  const handleDelete = async (id) => {
+    await articleService.deleteArticle(id);
+    const newArticles = await articleService.getAll();
+    setArticles(newArticles);
+  };
+
   return (
     <>
       <div>
@@ -20,6 +26,7 @@ function App() {
           <div key={a.id}>
             <h3>{a.title}</h3>
             <h4>{a.id}</h4>
+            <button onClick={() => handleDelete(a.id)}>delete</button>
           </div>
         ))}
       </div>
