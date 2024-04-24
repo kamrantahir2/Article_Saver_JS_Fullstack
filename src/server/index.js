@@ -70,7 +70,18 @@ const unkownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown endpoint" });
 };
 
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message);
+
+  if (error.name === "CastError") {
+    return response.status(400).send({ error: "malformatted id" });
+
+    next(error);
+  }
+};
+
 app.use(unkownEndpoint);
+app.use(errorHandler);
 
 const PORT = 3001;
 
