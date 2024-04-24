@@ -16,9 +16,15 @@ mongoose
   });
 
 const articleSchema = new mongoose.Schema({
-  title: String,
+  title: {
+    type: String,
+    required: true,
+  },
   description: String,
-  url: String,
+  url: {
+    type: String,
+    required: true,
+  },
   favourite: Boolean,
 });
 
