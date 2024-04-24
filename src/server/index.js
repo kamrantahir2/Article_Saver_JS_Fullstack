@@ -39,24 +39,6 @@ app.get("/api/articles/:id", (request, response) => {
     });
 });
 
-app.put("/api/articles/:id", (request, response, next) => {
-  const body = request.body;
-  const id = request.params.id;
-
-  const article = {
-    title: body.title,
-    description: body.description,
-    url: body.url,
-    favourite: body.favourite,
-  };
-
-  Article.findByIdAndUpdate(id, article, { new: true })
-    .then((updatedArticle) => {
-      response.json(updatedArticle);
-    })
-    .catch((error) => next(error));
-});
-
 app.delete("/api/articles/:id", (request, response, next) => {
   const id = request.params.id;
   Article.findByIdAndDelete(id)
@@ -85,6 +67,28 @@ app.post("/api/articles", (request, response) => {
   article.save().then((savedArticle) => {
     response.json(savedArticle);
   });
+});
+
+app.put("/api/articles/:id", (request, response, next) => {
+  const body = request.body;
+  const id = request.params.id;
+
+  const article = {
+    title: body.title,
+    description: body.description,
+    url: body.url,
+    favourite: body.favourite,
+  };
+
+  Article.findByIdAndUpdate(id, article, {
+    new: true,
+    runValidators: true,
+    context: "query",
+  })
+    .then((updatedArticle) => {
+      response.json(updatedArticle);
+    })
+    .catch((error) => next(error));
 });
 
 // MIDDLEWARE FUNCTIONS
