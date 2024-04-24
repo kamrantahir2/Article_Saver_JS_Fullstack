@@ -39,10 +39,13 @@ app.get("/api/articles/:id", (request, response) => {
     });
 });
 
-app.delete("/api/articles/:id", (request, response) => {
-  const id = Number(request.params.id);
-  articles = articles.filter((a) => a.id !== id);
-  response.status(204).end();
+app.delete("/api/articles/:id", (request, response, next) => {
+  const id = request.params.id;
+  Article.findByIdAndDelete(id)
+    .then((result) => {
+      response.status(204).end();
+    })
+    .catch((error) => next(error));
 });
 
 app.post("/api/articles", (request, response) => {
@@ -65,6 +68,8 @@ app.post("/api/articles", (request, response) => {
     response.json(savedArticle);
   });
 });
+
+// MIDDLEWARE FUNCTIONS
 
 const unkownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown endpoint" });
