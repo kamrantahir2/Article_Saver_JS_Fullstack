@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import articleService from "./service/articles";
+import Togglable from "./components/Togglable";
 
 function App() {
   const [articles, setArticles] = useState([]);
+  const articleInfoRef = useRef();
 
   useEffect(() => {
     articleService.getAll().then((response) => {
@@ -25,8 +27,12 @@ function App() {
         {articles.map((a) => (
           <div key={a.id}>
             <h3>{a.title}</h3>
-            <h4>{a.id}</h4>
-            <button onClick={() => handleDelete(a.id)}>delete</button>
+            <Togglable buttonLabel="More info" ref={articleInfoRef}>
+              <h5>{a.url}</h5>
+              <h5>{a.description}</h5>
+              <button onClick={() => handleDelete(a.id)}>delete</button>
+              <br />
+            </Togglable>
           </div>
         ))}
       </div>
