@@ -13,7 +13,7 @@ const Articles = ({ articles, setArticles }) => {
   };
 
   return (
-    <div>
+    <div className="article">
       <h2>Articles</h2>
       {articles.map((a) => (
         <div key={a.id}>
@@ -28,10 +28,13 @@ const Articles = ({ articles, setArticles }) => {
             </h5>
             <h5>Description: {a.description}</h5>
             <h5>Favourite: {a.favourite.toString()}</h5>
-            <button onClick={() => handleDelete(a.id)}>delete</button>
-            <br />
-            <UpdateArticle articles={articles} article={a} />
+            <button onClick={() => handleDelete(a.id)}>Delete</button>
           </Togglable>
+          <UpdateArticle
+            articles={articles}
+            setArticles={setArticles}
+            article={a}
+          />
         </div>
       ))}
     </div>
