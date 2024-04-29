@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import Togglable from "./Togglable";
 import articleService from "../service/articles";
+import UpdateArticle from "./UpdateArticle";
 
 const Articles = ({ articles, setArticles }) => {
   const articleInfoRef = useRef();
@@ -29,6 +30,13 @@ const Articles = ({ articles, setArticles }) => {
             <h5>Favourite: {a.favourite.toString()}</h5>
             <button onClick={() => handleDelete(a.id)}>delete</button>
             <br />
+            <UpdateArticle
+              articles={articles}
+              title={a.title}
+              description={a.description}
+              url={a.url}
+              favourite={a.favourite}
+            />
           </Togglable>
         </div>
       ))}
