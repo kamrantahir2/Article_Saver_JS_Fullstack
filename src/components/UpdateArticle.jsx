@@ -2,11 +2,21 @@ import { useState, useRef } from "react";
 import Togglable from "./Togglable";
 import articleService from "../service/articles";
 
-const UpdateArticle = ({ title, description, url, favourite, articles }) => {
-  const [updatedTitle, setUpdatedTitle] = useState(title);
-  const [updatedDezscription, setUpdatedDescription] = useState(description);
-  const [updatedUrl, setUpdatedUrl] = useState(url);
-  const [updatedFavourite, setUpdatedFavourite] = useState(favourite);
+const UpdateArticle = ({ article, articles }) => {
+  const [updatedTitle, setUpdatedTitle] = useState(article.title);
+  const [updatedDescription, setUpdatedDescription] = useState(
+    article.description
+  );
+  const [updatedUrl, setUpdatedUrl] = useState(article.url);
+  const [updatedFavourite, setUpdatedFavourite] = useState(article.favourite);
+
+  const handleUpdate = () => {};
+
+  return (
+    <div>
+      <form onSubmit={handleUpdate}></form>
+    </div>
+  );
 };
 
 export default UpdateArticle;
