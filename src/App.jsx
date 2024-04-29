@@ -5,6 +5,7 @@ import "./App.css";
 import articleService from "./service/articles";
 import Togglable from "./components/Togglable";
 import Articles from "./components/Articles";
+import ArticleForm from "./components/ArticleForm";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -15,15 +16,11 @@ function App() {
     });
   }, []);
 
-  const handleDelete = async (id) => {
-    await articleService.deleteArticle(id);
-    const newArticles = await articleService.getAll();
-    setArticles(newArticles);
-  };
-
   return (
     <div>
-      <Articles articles={articles}></Articles>
+      <h1>Article Saver</h1>
+      <ArticleForm articles={articles} setArticles={setArticles} />
+      <Articles articles={articles} setArticles={setArticles} />
     </div>
   );
 }
