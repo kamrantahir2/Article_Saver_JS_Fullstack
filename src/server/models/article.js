@@ -15,6 +15,10 @@ const articleSchema = new mongoose.Schema({
     required: true,
   },
   favourite: Boolean,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 articleSchema.set("toJSON", {
