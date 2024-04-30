@@ -3,10 +3,12 @@ const articlesRouter = express.Router();
 import Article from "../models/article.js";
 import User from "../models/user.js";
 
-articlesRouter.get("/", (request, response) => {
-  Article.find({}).then((result) => {
-    response.json(result);
+articlesRouter.get("/", async (request, response) => {
+  const articles = await Article.find({}).populate("user", {
+    username: 1,
+    name: 1,
   });
+  response.json(articles);
 });
 
 articlesRouter.get("/:id", (request, response) => {

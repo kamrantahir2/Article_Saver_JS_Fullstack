@@ -2,6 +2,8 @@ import { useRef } from "react";
 import Togglable from "./Togglable";
 import articleService from "../service/articles";
 import UpdateArticle from "./UpdateArticle";
+import User from "../server/models/user";
+import userService from "../service/users";
 
 const Articles = ({ articles, setArticles }) => {
   const articleInfoRef = useRef();
