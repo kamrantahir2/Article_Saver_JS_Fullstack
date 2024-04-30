@@ -1,6 +1,7 @@
 import express from "express";
 const articlesRouter = express.Router();
 import Article from "../models/article.js";
+import User from "../models/user.js";
 
 articlesRouter.get("/", (request, response) => {
   Article.find({}).then((result) => {
@@ -33,7 +34,7 @@ articlesRouter.delete("/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
-articlesRouter.post("/", (request, response) => {
+articlesRouter.post("/", async (request, response) => {
   const body = request.body;
 
   if (!body.title || !body.url) {
@@ -42,16 +43,20 @@ articlesRouter.post("/", (request, response) => {
     });
   }
 
+  const user = await User.findById(body.userId);
+
   const article = new Article({
     title: body.title,
     description: body.description,
     url: body.url,
     favourite: Boolean(body.favourite) || false,
+    user: user.id,
   });
 
-  article.save().then((savedArticle) => {
-    response.json(savedArticle);
-  });
+  const savedArticle = await article.save();
+  user.articles = user.articles.concat(savedArticle._id);
+  await user.save();
+  response.json(savedArticle);
 });
 
 articlesRouter.put("/:id", (request, response, next) => {
