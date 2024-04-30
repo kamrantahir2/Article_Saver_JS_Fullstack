@@ -21,6 +21,6 @@ userSchema.set("toJSON", {
   },
 });
 
-const User = returnedObject.passwordHash;
+const User = mongoose.model("User", userSchema);
 
 export default User;

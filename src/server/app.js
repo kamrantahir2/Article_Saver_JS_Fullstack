@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
 import middleware from "./utils/middleware.js";
+import usersRouter from "./controllers/users.js";
 
 const url = process.env.MONGODB_URI;
 
@@ -27,6 +28,7 @@ app.use(express.static("dist"));
 app.use(express.json());
 
 app.use("/api/articles", articlesRouter);
+app.use("/api/users", usersRouter);
 
 app.use(middleware.unkownEndpoint);
 app.use(middleware.errorHandler);
