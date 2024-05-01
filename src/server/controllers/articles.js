@@ -2,6 +2,17 @@ import express from "express";
 const articlesRouter = express.Router();
 import Article from "../models/article.js";
 import User from "../models/user.js";
+import jwt from "jsonwebtoken";
+
+const getTokenFrom = (request) => {
+  const authorization = request.get("authorization");
+
+  if (authorization && authorization.startsWith("Bearer ")) {
+    return authorization.replace("Bearer ", "");
+  }
+
+  return null;
+};
 
 articlesRouter.get("/", async (request, response) => {
   const articles = await Article.find({}).populate("user", {
