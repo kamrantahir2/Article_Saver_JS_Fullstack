@@ -4,11 +4,13 @@ import articleService from "./service/articles";
 import Togglable from "./components/Togglable";
 import Articles from "./components/Articles";
 import ArticleForm from "./components/ArticleForm";
+import loginService from "./service/login.js";
 
 function App() {
   const [articles, setArticles] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     articleService.getAll().then((response) => {
@@ -16,9 +18,26 @@ function App() {
     });
   }, []);
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    console.log("Logging in with ", username, password);
+
+    const user = await loginService.login({ username, password });
+
+    setUser(user);
+
+    if (!user) {
+      console.log("Wrong username or password");
+    }
+
+    console.log("USER: ", user);
+
+    setUsername("");
+    setPassword("");
+  };
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    setUser(null);
   };
 
   return (
@@ -47,7 +66,7 @@ function App() {
         </div>
         <button type="submit">Login</button>
       </form>
-
+      <button onClick={handleLogout}>Logout</button>
       <h1>Article Saver</h1>
       <ArticleForm articles={articles} setArticles={setArticles} />
       <Articles articles={articles} setArticles={setArticles} />
