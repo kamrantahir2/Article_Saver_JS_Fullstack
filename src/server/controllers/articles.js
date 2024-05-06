@@ -27,6 +27,10 @@ articlesRouter.get("/", async (request, response) => {
 articlesRouter.get("/:id", (request, response) => {
   const id = request.params.id;
   Article.findById(id)
+    .populate("user", {
+      username: 1,
+      name: 1,
+    })
     .then((article) => {
       if (article) {
         response.json(article);
