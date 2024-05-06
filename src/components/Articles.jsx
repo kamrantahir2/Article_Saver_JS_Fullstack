@@ -21,7 +21,6 @@ const Articles = ({ articles, setArticles }) => {
         <div key={a.id}>
           <h3>{a.title}</h3>
           <Togglable buttonLabel="More info" ref={articleInfoRef}>
-            {console.log()}
             <h5>
               URL:{" "}
               <a href={a.url} rel="noopener" target="_blank">
