@@ -14,6 +14,8 @@ const errorHandler = (error, request, response, next) => {
     error.message.includes("E11000 duplicate key error")
   ) {
     return response, json(400).json({ error: "Username is not available" });
+  } else if (error.name === "JsonWebTokenError") {
+    return response.status(401).json({ error: "token invalid" });
   }
 };
 

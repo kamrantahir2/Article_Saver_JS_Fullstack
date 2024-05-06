@@ -3,14 +3,16 @@ const articlesRouter = express.Router();
 import Article from "../models/article.js";
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 const getTokenFrom = (request) => {
   const authorization = request.get("authorization");
 
   if (authorization && authorization.startsWith("Bearer ")) {
-    return authorization.replace("Bearer ", "");
+    const token = authorization.replace("Bearer ", "");
+    return token;
   }
-
   return null;
 };
 
@@ -50,13 +52,19 @@ articlesRouter.delete("/:id", (request, response, next) => {
 articlesRouter.post("/", async (request, response) => {
   const body = request.body;
 
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: "token invalid" });
+  }
+
   if (!body.title || !body.url) {
     return response.status(400).json({
       error: "missing content",
     });
   }
 
-  const user = await User.findById(body.userId);
+  const user = await User.findById(decodedToken.id);
 
   const article = new Article({
     title: body.title,

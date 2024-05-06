@@ -30,7 +30,6 @@ const Articles = ({ articles, setArticles }) => {
             </h5>
             <h5>Description: {a.description}</h5>
             <h5>Favourite: {a.favourite.toString()}</h5>
-            <h5>User: {a.user || "No user"}</h5>
             <button onClick={() => handleDelete(a.id)}>Delete</button>
           </Togglable>
           <UpdateArticle
