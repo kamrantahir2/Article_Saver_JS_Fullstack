@@ -20,6 +20,8 @@ const ArticleForm = ({ setArticles, articles }) => {
 
     const savedArticle = await articleService.create(newArticle);
 
+    console.log("saved article: ", savedArticle);
+
     setArticles(articles.concat(savedArticle));
 
     setTitle("");

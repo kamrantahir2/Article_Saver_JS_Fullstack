@@ -1,5 +1,6 @@
 import { useState } from "react";
 import loginService from "../service/login.js";
+import articleService from "../service/articles.js";
 
 const LoginForm = ({ setUser }) => {
   const [username, setUsername] = useState("");
@@ -10,6 +11,7 @@ const LoginForm = ({ setUser }) => {
 
     const user = await loginService.login({ username, password });
 
+    articleService.setToken(user.token);
     setUser(user);
 
     if (!user) {
