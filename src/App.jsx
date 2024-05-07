@@ -34,8 +34,7 @@ function App() {
   return (
     <div>
       <h1>Article Saver</h1>
-      {user === null && loginForm()}
-      {user !== null && articleForm()}
+      {user === null ? loginForm() : articleForm()}
       <Articles articles={articles} setArticles={setArticles} />
       <button onClick={handleLogout}>Logout</button>
     </div>
