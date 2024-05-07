@@ -23,13 +23,21 @@ function App() {
     setUser(null);
   };
 
+  const loginForm = () => {
+    return <LoginForm setUser={setUser} />;
+  };
+
+  const articleForm = () => {
+    return <ArticleForm articles={articles} setArticles={setArticles} />;
+  };
+
   return (
     <div>
-      <LoginForm setUser={setUser} />
-      <button onClick={handleLogout}>Logout</button>
       <h1>Article Saver</h1>
-      <ArticleForm articles={articles} setArticles={setArticles} />
+      {user === null && loginForm()}
+      {user !== null && articleForm()}
       <Articles articles={articles} setArticles={setArticles} />
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }
