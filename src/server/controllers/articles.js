@@ -79,9 +79,16 @@ articlesRouter.post("/", async (request, response) => {
   });
 
   const savedArticle = await article.save();
-  user.articles = user.articles.concat(savedArticle._id);
+
+  const foundSavedArticle = await Article.findOne(savedArticle).populate(
+    "user",
+    { username: 1, name: 1 }
+  );
+  console.log(foundSavedArticle);
+
+  user.articles = user.articles.concat(foundSavedArticle._id);
   await user.save();
-  response.json(savedArticle);
+  response.json(foundSavedArticle);
 });
 
 articlesRouter.put("/:id", (request, response, next) => {
