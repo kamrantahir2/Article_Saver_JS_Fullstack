@@ -60,13 +60,15 @@ function App() {
           {articleForm()}
         </div>
       )}
+      <button className="btn" onClick={handleLogout}>
+        Logout
+      </button>
       <Articles
         articles={articles}
         setArticles={setArticles}
         user={user}
         setUser={setUser}
       />
-      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }
