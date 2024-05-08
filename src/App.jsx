@@ -18,6 +18,16 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    const loggedUserJson = window.localStorage.getItem("loggedArticleAppUser");
+
+    if (loggedUserJson) {
+      const user = JSON.parse(loggedUserJson);
+      setUser(user);
+      articleService.setToken(user.token);
+    }
+  }, []);
+
   const handleLogout = (event) => {
     event.preventDefault();
     setUser(null);

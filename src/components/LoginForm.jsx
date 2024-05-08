@@ -11,6 +11,8 @@ const LoginForm = ({ setUser }) => {
 
     const user = await loginService.login({ username, password });
 
+    window.localStorage.setItem("loggedArticleAppUser", JSON.stringify(user));
+
     articleService.setToken(user.token);
     setUser(user);
 

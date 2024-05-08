@@ -84,7 +84,6 @@ articlesRouter.post("/", async (request, response) => {
     "user",
     { username: 1, name: 1 }
   );
-  console.log(foundSavedArticle);
 
   user.articles = user.articles.concat(foundSavedArticle._id);
   await user.save();
