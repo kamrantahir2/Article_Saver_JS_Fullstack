@@ -30,6 +30,7 @@ function App() {
 
   const handleLogout = (event) => {
     event.preventDefault();
+    window.localStorage.removeItem("loggedArticleAppUser");
     setUser(null);
   };
 
