@@ -5,7 +5,7 @@ import UpdateArticle from "./UpdateArticle";
 import User from "../server/models/user";
 import userService from "../service/users";
 
-const Articles = ({ articles, setArticles }) => {
+const Articles = ({ articles, setArticles, user, setUser }) => {
   const articleInfoRef = useRef();
 
   const handleDelete = async (id) => {
@@ -36,6 +36,8 @@ const Articles = ({ articles, setArticles }) => {
             articles={articles}
             setArticles={setArticles}
             article={a}
+            user={user}
+            setUser={setUser}
           />
         </div>
       ))}

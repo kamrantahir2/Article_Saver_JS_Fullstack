@@ -39,7 +39,14 @@ function App() {
   };
 
   const articleForm = () => {
-    return <ArticleForm articles={articles} setArticles={setArticles} />;
+    return (
+      <ArticleForm
+        articles={articles}
+        setArticles={setArticles}
+        user={user}
+        setUser={setUser}
+      />
+    );
   };
 
   return (
@@ -53,7 +60,12 @@ function App() {
           {articleForm()}
         </div>
       )}
-      <Articles articles={articles} setArticles={setArticles} />
+      <Articles
+        articles={articles}
+        setArticles={setArticles}
+        user={user}
+        setUser={setUser}
+      />
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import Togglable from "./Togglable";
 import articleService from "../service/articles";
 
-const ArticleForm = ({ setArticles, articles }) => {
+const ArticleForm = ({ setArticles, articles, user, setUser }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
