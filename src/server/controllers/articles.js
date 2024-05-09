@@ -115,32 +115,51 @@ articlesRouter.post("/", async (request, response, next) => {
   }
 });
 
-articlesRouter.put("/:id", (request, response, next) => {
-  const body = request.body;
-  const id = request.params.id;
+articlesRouter.put("/:id", async (request, response, next) => {
+  try {
+    const body = request.body;
+    const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
 
-  if (!body.title || !body.url) {
-    return response.status(400).json({
-      error: "missing content",
+    if (!decodedToken.id) {
+      return response.status(401).json({ error: "token invalid" });
+    }
+
+    const user = await User.findById(decodedToken.id);
+
+    const userId = user._id.toString();
+
+    const id = request.params.id;
+
+    const foundArticle = await Article.findById(id);
+
+    const articleUser = foundArticle.user._id.toString();
+
+    if (userId !== articleUser) {
+      return response.status(401).json({ error: "Not authorized" });
+    }
+
+    if (!body.title || !body.url) {
+      return response.status(400).json({
+        error: "missing content",
+      });
+    }
+
+    const article = {
+      title: body.title,
+      description: body.description,
+      url: body.url,
+      favourite: body.favourite,
+    };
+
+    const updatedArticle = await Article.findByIdAndUpdate(id, article, {
+      new: true,
+      runValidators: true,
+      context: "query",
     });
+    response.json(updatedArticle);
+  } catch (error) {
+    next(error);
   }
-
-  const article = {
-    title: body.title,
-    description: body.description,
-    url: body.url,
-    favourite: body.favourite,
-  };
-
-  Article.findByIdAndUpdate(id, article, {
-    new: true,
-    runValidators: true,
-    context: "query",
-  })
-    .then((updatedArticle) => {
-      response.json(updatedArticle);
-    })
-    .catch((error) => next(error));
 });
 
 export default articlesRouter;

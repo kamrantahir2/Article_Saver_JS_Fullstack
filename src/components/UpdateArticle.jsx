@@ -10,22 +10,29 @@ const UpdateArticle = ({ article, articles, setArticles, user, setUser }) => {
   const updatedArticleRef = useRef();
 
   const handleUpdate = async (e, id) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    const updatedArticle = {
-      title: title,
-      description: description,
-      url: url,
-      favourite: favourite,
-    };
+      const updatedArticle = {
+        title: title,
+        description: description,
+        url: url,
+        favourite: favourite,
+      };
 
-    const returnedArticle = await articleService.update(id, updatedArticle);
+      const returnedArticle = await articleService.update(id, updatedArticle);
 
-    setArticles(
-      articles.map((a) => (a.id !== returnedArticle.id ? a : returnedArticle))
-    );
-    console.log("returnedArticle: ", returnedArticle);
-    updatedArticleRef.current.toggleVisibility();
+      setArticles(
+        articles.map((a) => (a.id !== returnedArticle.id ? a : returnedArticle))
+      );
+      console.log("returnedArticle: ", returnedArticle);
+      updatedArticleRef.current.toggleVisibility();
+    } catch (error) {
+      if (error.response.data.error.includes("Token Expired")) {
+        window.localStorage.removeItem("loggedArticleAppUser");
+        setUser(null);
+      }
+    }
   };
 
   return (
