@@ -54,40 +54,45 @@ articlesRouter.delete("/:id", (request, response, next) => {
 });
 
 articlesRouter.post("/", async (request, response) => {
-  const body = request.body;
+  try {
+    const body = request.body;
 
-  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+    const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
 
-  if (!decodedToken.id) {
-    return response.status(401).json({ error: "token invalid" });
-  }
+    if (!decodedToken.id) {
+      return response.status(401).json({ error: "token invalid" });
+    }
 
-  if (!body.title || !body.url) {
-    return response.status(400).json({
-      error: "missing content",
+    if (!body.title || !body.url) {
+      return response.status(400).json({
+        error: "missing content",
+      });
+    }
+
+    const user = await User.findById(decodedToken.id);
+
+    const article = new Article({
+      title: body.title,
+      description: body.description,
+      url: body.url,
+      favourite: Boolean(body.favourite) || false,
+      user: user.id,
     });
+
+    const savedArticle = await article.save();
+
+    const foundSavedArticle = await Article.findOne(savedArticle).populate(
+      "user",
+      { username: 1, name: 1 }
+    );
+
+    user.articles = user.articles.concat(foundSavedArticle._id);
+    await user.save();
+    response.json(foundSavedArticle);
+  } catch (error) {
+    response.status(401).json({ error: "Token Expired" });
+    console.log(error);
   }
-
-  const user = await User.findById(decodedToken.id);
-
-  const article = new Article({
-    title: body.title,
-    description: body.description,
-    url: body.url,
-    favourite: Boolean(body.favourite) || false,
-    user: user.id,
-  });
-
-  const savedArticle = await article.save();
-
-  const foundSavedArticle = await Article.findOne(savedArticle).populate(
-    "user",
-    { username: 1, name: 1 }
-  );
-
-  user.articles = user.articles.concat(foundSavedArticle._id);
-  await user.save();
-  response.json(foundSavedArticle);
 });
 
 articlesRouter.put("/:id", (request, response, next) => {

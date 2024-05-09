@@ -10,23 +10,31 @@ const ArticleForm = ({ setArticles, articles, user, setUser }) => {
   const newArticleRef = useRef();
 
   const addArticle = async (e) => {
-    e.preventDefault();
-    const newArticle = {
-      title: title,
-      description: description,
-      url: url,
-      favourite: favourite,
-    };
+    try {
+      e.preventDefault();
+      const newArticle = {
+        title: title,
+        description: description,
+        url: url,
+        favourite: favourite,
+      };
 
-    const savedArticle = await articleService.create(newArticle);
+      const savedArticle = await articleService.create(newArticle);
 
-    console.log("saved article: ", savedArticle);
+      console.log("saved article: ", savedArticle);
 
-    setArticles(articles.concat(savedArticle));
+      setArticles(articles.concat(savedArticle));
 
-    setTitle("");
-    setDescription("");
-    setUrl("");
+      setTitle("");
+      setDescription("");
+      setUrl("");
+    } catch (error) {
+      console.log(error);
+      if (error.response.data.error.includes("Token Expired")) {
+        window.localStorage.removeItem("loggedArticleAppUser");
+        setUser(null);
+      }
+    }
   };
 
   return (
