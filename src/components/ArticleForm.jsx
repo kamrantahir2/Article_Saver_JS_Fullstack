@@ -21,13 +21,13 @@ const ArticleForm = ({ setArticles, articles, user, setUser }) => {
 
       const savedArticle = await articleService.create(newArticle);
 
-      console.log("saved article: ", savedArticle);
-
       setArticles(articles.concat(savedArticle));
 
       setTitle("");
       setDescription("");
       setUrl("");
+
+      newArticleRef.current.toggleVisibility();
     } catch (error) {
       console.log(error);
       if (error.response.data.error.includes("Token Expired")) {

@@ -20,8 +20,6 @@ const LoginForm = ({ setUser }) => {
       console.log("Wrong username or password");
     }
 
-    console.log("USER: ", user);
-
     setUsername("");
     setPassword("");
   };
