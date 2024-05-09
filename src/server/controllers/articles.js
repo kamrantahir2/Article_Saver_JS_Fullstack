@@ -45,7 +45,25 @@ articlesRouter.get("/:id", (request, response) => {
 });
 
 articlesRouter.delete("/:id", async (request, response, next) => {
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: "token invalid" });
+  }
+
+  const user = await User.findById(decodedToken.id);
+
+  const userId = user._id.toString();
   const id = request.params.id;
+
+  const foundArticle = await Article.findById(id);
+
+  const articleUser = foundArticle.user._id.toString();
+
+  if (userId !== articleUser) {
+    return response.status(401).json({ error: "Not authorized" });
+  }
+
   await Article.findByIdAndDelete(id);
 
   response.status(204).end();

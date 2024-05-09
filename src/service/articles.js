@@ -15,12 +15,14 @@ const getAll = () => {
   });
 };
 
-const create = (newObject) => {
-  const config = {
+const config = () => {
+  return {
     headers: { Authorization: token },
   };
+};
 
-  const request = axios.post(baseUrl, newObject, config);
+const create = (newObject) => {
+  const request = axios.post(baseUrl, newObject, config());
   return request.then((response) => response.data);
 };
 
@@ -30,7 +32,7 @@ const update = (id, newObject) => {
 };
 
 const deleteArticle = (id) => {
-  const request = axios.delete(`${baseUrl}/${id}`);
+  const request = axios.delete(`${baseUrl}/${id}`, config());
   return request.then((response) => response.data);
 };
 
