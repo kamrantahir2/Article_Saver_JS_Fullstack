@@ -53,7 +53,7 @@ articlesRouter.delete("/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
-articlesRouter.post("/", async (request, response) => {
+articlesRouter.post("/", async (request, response, next) => {
   try {
     const body = request.body;
 
@@ -90,8 +90,7 @@ articlesRouter.post("/", async (request, response) => {
     await user.save();
     response.json(foundSavedArticle);
   } catch (error) {
-    response.status(401).json({ error: "Token Expired" });
-    console.log(error);
+    next(error);
   }
 });
 

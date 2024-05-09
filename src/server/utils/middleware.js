@@ -16,6 +16,9 @@ const errorHandler = (error, request, response, next) => {
     return response, json(400).json({ error: "Username is not available" });
   } else if (error.name === "JsonWebTokenError") {
     return response.status(401).json({ error: "token invalid" });
+  } else if (error.name === "TokenExpiredError") {
+    console.log(error);
+    return response.status(401).json({ error: "Token Expired" });
   }
 };
 
