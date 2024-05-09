@@ -9,9 +9,16 @@ const Articles = ({ articles, setArticles, user, setUser }) => {
   const articleInfoRef = useRef();
 
   const handleDelete = async (id) => {
-    await articleService.deleteArticle(id);
-    const newArticles = await articleService.getAll();
-    setArticles(newArticles);
+    try {
+      await articleService.deleteArticle(id);
+      const newArticles = await articleService.getAll();
+      setArticles(newArticles);
+    } catch (error) {
+      if (error.response.data.error.includes("Token Expired")) {
+        window.localStorage.removeItem("loggedArticleAppUser");
+        setUser(null);
+      }
+    }
   };
 
   return (
