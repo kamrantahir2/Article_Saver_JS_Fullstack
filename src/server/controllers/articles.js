@@ -40,17 +40,15 @@ articlesRouter.get("/:id", (request, response) => {
     })
     .catch((error) => {
       console.log(error);
-      response.status(500).end();
+      response.status(400).end();
     });
 });
 
-articlesRouter.delete("/:id", (request, response, next) => {
+articlesRouter.delete("/:id", async (request, response, next) => {
   const id = request.params.id;
-  Article.findByIdAndDelete(id)
-    .then((result) => {
-      response.status(204).end();
-    })
-    .catch((error) => next(error));
+  await Article.findByIdAndDelete(id);
+
+  response.status(204).end();
 });
 
 articlesRouter.post("/", async (request, response, next) => {
