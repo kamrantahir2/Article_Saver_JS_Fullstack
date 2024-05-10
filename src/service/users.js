@@ -6,4 +6,9 @@ const getUserById = (id) => {
   return request.then((response) => response.data);
 };
 
+const addUser = (userObject) => {
+  const request = axios.post(baseUrl);
+  return request.then((response) => response.data);
+};
+
 export default { getUserById };
