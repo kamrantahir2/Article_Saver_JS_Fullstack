@@ -7,8 +7,8 @@ const getUserById = (id) => {
 };
 
 const addUser = (userObject) => {
-  const request = axios.post(baseUrl);
+  const request = axios.post(baseUrl, userObject);
   return request.then((response) => response.data);
 };
 
-export default { getUserById };
+export default { getUserById, addUser };

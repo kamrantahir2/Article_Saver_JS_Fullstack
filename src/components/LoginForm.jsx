@@ -26,6 +26,7 @@ const LoginForm = ({ setUser }) => {
 
   return (
     <form onSubmit={handleLogin}>
+      <h4>Log in</h4>
       <div>
         <label htmlFor="username">Username: </label>
         <input

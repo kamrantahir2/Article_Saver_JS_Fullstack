@@ -6,6 +6,7 @@ import Articles from "./components/Articles";
 import ArticleForm from "./components/ArticleForm";
 import loginService from "./service/login.js";
 import LoginForm from "./components/LoginForm.jsx";
+import UserForm from "./components/UserForm.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -35,7 +36,12 @@ function App() {
   };
 
   const loginForm = () => {
-    return <LoginForm setUser={setUser} />;
+    return (
+      <div>
+        <LoginForm setUser={setUser} />
+        <UserForm setUser={setUser} />
+      </div>
+    );
   };
 
   const articleForm = () => {
@@ -52,6 +58,7 @@ function App() {
   return (
     <div>
       <h1>Article Saver</h1>
+
       {user === null ? (
         loginForm()
       ) : (
@@ -60,9 +67,11 @@ function App() {
           {articleForm()}
         </div>
       )}
+
       <button className="btn" onClick={handleLogout}>
         Logout
       </button>
+
       <Articles
         articles={articles}
         setArticles={setArticles}
