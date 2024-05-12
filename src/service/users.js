@@ -7,6 +7,7 @@ const getUserById = (id) => {
 };
 
 const addUser = (userObject) => {
+  userObject.username = userObject.username.toLowerCase();
   const request = axios.post(baseUrl, userObject);
   return request.then((response) => response.data);
 };
