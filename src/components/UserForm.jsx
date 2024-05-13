@@ -3,11 +3,14 @@ import userService from "../service/users.js";
 import Togglable from "./Togglable.jsx";
 import loginService from "../service/login.js";
 import articleService from "../service/articles.js";
+import { useNavigate } from "react-router-dom";
 
 const UserForm = ({ setUser }) => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -35,6 +38,7 @@ const UserForm = ({ setUser }) => {
     setUsername("");
     setName("");
     setPassword("");
+    navigate("/");
   };
 
   return (

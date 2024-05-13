@@ -1,10 +1,13 @@
 import { useState } from "react";
 import loginService from "../service/login.js";
 import articleService from "../service/articles.js";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ setUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -22,6 +25,7 @@ const LoginForm = ({ setUser }) => {
 
     setUsername("");
     setPassword("");
+    navigate("/");
   };
 
   return (

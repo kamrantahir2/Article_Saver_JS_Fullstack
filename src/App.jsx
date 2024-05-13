@@ -7,10 +7,11 @@ import LoginForm from "./components/LoginForm.jsx";
 import UserForm from "./components/UserForm.jsx";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Article from "./components/Article.jsx";
+import { useNavigate } from "react-router-dom";
+import LogoutButton from "./components/LogoutButton.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
-
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -28,12 +29,6 @@ function App() {
       articleService.setToken(user.token);
     }
   }, []);
-
-  const handleLogout = (event) => {
-    event.preventDefault();
-    window.localStorage.removeItem("loggedArticleAppUser");
-    setUser(null);
-  };
 
   const loginForm = () => {
     return (
@@ -83,8 +78,6 @@ function App() {
 
   return (
     <Router>
-      {!user && loginForm()}
-
       <div>
         <Link className="link" to="/">
           All Articles
@@ -92,6 +85,18 @@ function App() {
         <Link className="link" to="/articles">
           My Articles
         </Link>
+        {user ? (
+          <div>
+            <em>{user.name} logged in</em>
+            <Link className="link" to="/logout">
+              Logout
+            </Link>
+          </div>
+        ) : (
+          <Link className="link" to="/login">
+            Login
+          </Link>
+        )}
       </div>
 
       <Routes>
@@ -104,6 +109,16 @@ function App() {
               user={user}
               setUser={setUser}
             />
+          }
+        />
+
+        <Route
+          path="/login"
+          element={
+            <div>
+              <LoginForm setUser={setUser} />
+              <UserForm setUser={setUser} />
+            </div>
           }
         />
 
@@ -131,9 +146,8 @@ function App() {
           }
         />
       </Routes>
-      <button className="btn" onClick={handleLogout}>
-        Logout
-      </button>
+
+      {user && <LogoutButton setUser={setUser} />}
     </Router>
   );
 }
