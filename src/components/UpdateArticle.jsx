@@ -25,7 +25,6 @@ const UpdateArticle = ({ article, articles, setArticles, user, setUser }) => {
       setArticles(
         articles.map((a) => (a.id !== returnedArticle.id ? a : returnedArticle))
       );
-      console.log("returnedArticle: ", returnedArticle);
       updatedArticleRef.current.toggleVisibility();
     } catch (error) {
       if (error.response.data.error.includes("Token Expired")) {

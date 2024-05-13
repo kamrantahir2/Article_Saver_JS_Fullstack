@@ -39,14 +39,18 @@ const Article = ({ articles, setArticles, user, setUser }) => {
       <h5>Description: {article.description}</h5>
       <h5>Favourite: {article.favourite.toString()}</h5>
       <h5>User: {article.user.username}</h5>
-      <button onClick={() => handleDelete(article.id)}>Delete</button>
-      <UpdateArticle
-        articles={articles}
-        setArticles={setArticles}
-        article={article}
-        user={user}
-        setUser={setUser}
-      />
+      {user.username === article.user.username && (
+        <button onClick={() => handleDelete(article.id)}>Delete</button>
+      )}
+      {user.username === article.user.username && (
+        <UpdateArticle
+          articles={articles}
+          setArticles={setArticles}
+          article={article}
+          user={user}
+          setUser={setUser}
+        />
+      )}
     </div>
   );
 };
