@@ -7,7 +7,7 @@ import LoginForm from "./components/LoginForm.jsx";
 import UserForm from "./components/UserForm.jsx";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Article from "./components/Article.jsx";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import LogoutButton from "./components/LogoutButton.jsx";
 
 function App() {
@@ -82,15 +82,12 @@ function App() {
         <Link className="link" to="/">
           All Articles
         </Link>
-        <Link className="link" to="/articles">
+        <Link className="link" to="/my_articles">
           My Articles
         </Link>
         {user ? (
           <div>
             <em>{user.name} logged in</em>
-            <Link className="link" to="/logout">
-              Logout
-            </Link>
           </div>
         ) : (
           <Link className="link" to="/login">
@@ -135,14 +132,18 @@ function App() {
         />
 
         <Route
-          path="/articles"
+          path="/my_articles"
           element={
-            <Articles
-              articles={articles}
-              setArticles={setArticles}
-              user={user}
-              setUser={setUser}
-            />
+            user ? (
+              <Articles
+                articles={articles}
+                setArticles={setArticles}
+                user={user}
+                setUser={setUser}
+              />
+            ) : (
+              <Navigate replace to="/login" />
+            )
           }
         />
       </Routes>
