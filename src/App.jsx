@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import articleService from "./service/articles";
 import Articles from "./components/Articles";
-import ArticleForm from "./components/ArticleForm";
 import LoginForm from "./components/LoginForm.jsx";
 import UserForm from "./components/UserForm.jsx";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -13,6 +12,7 @@ import LogoutButton from "./components/LogoutButton.jsx";
 function App() {
   const [articles, setArticles] = useState([]);
   const [user, setUser] = useState(null);
+  const [myArticles, setMyArticles] = useState([]);
 
   useEffect(() => {
     articleService.getAll().then((response) => {
@@ -30,51 +30,11 @@ function App() {
     }
   }, []);
 
-  const loginForm = () => {
-    return (
-      <div>
-        <LoginForm setUser={setUser} />
-        <UserForm setUser={setUser} />
-      </div>
-    );
-  };
-
-  const articleForm = () => {
-    return (
-      <ArticleForm
-        articles={articles}
-        setArticles={setArticles}
-        user={user}
-        setUser={setUser}
-      />
-    );
-  };
-
-  // return (
-  //   <div>
-  //     <h1>Article Saver</h1>
-
-  //     {user === null ? (
-  //       loginForm()
-  //     ) : (
-  //       <div>
-  //         <p>{user.name} logged in</p>
-  //         {articleForm()}
-  //       </div>
-  //     )}
-
-  // <button className="btn" onClick={handleLogout}>
-  //   Logout
-  // </button>
-
-  // <Articles
-  //   articles={articles}
-  //   setArticles={setArticles}
-  //   user={user}
-  //   setUser={setUser}
-  // />
-  //   </div>
-  // );
+  useEffect(() => {
+    if (user) {
+      setMyArticles(articles.filter((a) => a.user.username === user.username));
+    }
+  }, [articles]);
 
   return (
     <Router>
@@ -136,7 +96,7 @@ function App() {
           element={
             user ? (
               <Articles
-                articles={articles}
+                articles={myArticles}
                 setArticles={setArticles}
                 user={user}
                 setUser={setUser}
