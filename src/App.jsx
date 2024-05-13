@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Article from "./components/Article.jsx";
 import { Navigate } from "react-router-dom";
 import LogoutButton from "./components/LogoutButton.jsx";
+import ArticleForm from "./components/ArticleForm.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -31,9 +32,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (user) {
-      setMyArticles(articles.filter((a) => a.user.username === user.username));
-    }
+    setMyArticles(
+      user ? articles.filter((a) => a.user.username === user.username) : []
+    );
   }, [articles]);
 
   return (
@@ -42,9 +43,16 @@ function App() {
         <Link className="link" to="/">
           All Articles
         </Link>
-        <Link className="link" to="/my_articles">
-          My Articles
-        </Link>
+        {user && (
+          <Link className="link" to="/my_articles">
+            My Articles
+          </Link>
+        )}
+        {user && (
+          <Link className="link" to="/add_new">
+            Add New Article
+          </Link>
+        )}
         {user ? (
           <div>
             <em>{user.name} logged in</em>
@@ -94,16 +102,24 @@ function App() {
         <Route
           path="/my_articles"
           element={
-            user ? (
-              <Articles
-                articles={myArticles}
-                setArticles={setArticles}
-                user={user}
-                setUser={setUser}
-              />
-            ) : (
-              <Navigate replace to="/login" />
-            )
+            <Articles
+              articles={myArticles}
+              setArticles={setArticles}
+              user={user}
+              setUser={setUser}
+            />
+          }
+        />
+
+        <Route
+          path="/add_new"
+          element={
+            <ArticleForm
+              articles={articles}
+              setArticles={setArticles}
+              user={user}
+              setUser={setUser}
+            />
           }
         />
       </Routes>
