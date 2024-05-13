@@ -6,6 +6,7 @@ import ArticleForm from "./components/ArticleForm";
 import LoginForm from "./components/LoginForm.jsx";
 import UserForm from "./components/UserForm.jsx";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Article from "./components/Article.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -83,9 +84,7 @@ function App() {
   return (
     <Router>
       {!user && loginForm()}
-      <button className="btn" onClick={handleLogout}>
-        Logout
-      </button>
+
       <div>
         <Link className="link" to="/">
           All Articles
@@ -109,6 +108,18 @@ function App() {
         />
 
         <Route
+          path="/articles/:id"
+          element={
+            <Article
+              articles={articles}
+              setArticles={setArticles}
+              user={user}
+              setUser={setUser}
+            />
+          }
+        />
+
+        <Route
           path="/articles"
           element={
             <Articles
@@ -120,6 +131,9 @@ function App() {
           }
         />
       </Routes>
+      <button className="btn" onClick={handleLogout}>
+        Logout
+      </button>
     </Router>
   );
 }
