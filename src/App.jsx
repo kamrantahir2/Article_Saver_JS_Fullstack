@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import articleService from "./service/articles";
-import Togglable from "./components/Togglable";
 import Articles from "./components/Articles";
 import ArticleForm from "./components/ArticleForm";
-import loginService from "./service/login.js";
 import LoginForm from "./components/LoginForm.jsx";
 import UserForm from "./components/UserForm.jsx";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -55,30 +54,73 @@ function App() {
     );
   };
 
+  // return (
+  //   <div>
+  //     <h1>Article Saver</h1>
+
+  //     {user === null ? (
+  //       loginForm()
+  //     ) : (
+  //       <div>
+  //         <p>{user.name} logged in</p>
+  //         {articleForm()}
+  //       </div>
+  //     )}
+
+  // <button className="btn" onClick={handleLogout}>
+  //   Logout
+  // </button>
+
+  // <Articles
+  //   articles={articles}
+  //   setArticles={setArticles}
+  //   user={user}
+  //   setUser={setUser}
+  // />
+  //   </div>
+  // );
+
   return (
-    <div>
-      <h1>Article Saver</h1>
-
-      {user === null ? (
-        loginForm()
-      ) : (
-        <div>
-          <p>{user.name} logged in</p>
-          {articleForm()}
-        </div>
-      )}
-
+    <Router>
+      {!user && loginForm()}
       <button className="btn" onClick={handleLogout}>
         Logout
       </button>
+      <div>
+        <Link className="link" to="/">
+          All Articles
+        </Link>
+        <Link className="link" to="/articles">
+          My Articles
+        </Link>
+      </div>
 
-      <Articles
-        articles={articles}
-        setArticles={setArticles}
-        user={user}
-        setUser={setUser}
-      />
-    </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Articles
+              articles={articles}
+              setArticles={setArticles}
+              user={user}
+              setUser={setUser}
+            />
+          }
+        />
+
+        <Route
+          path="/articles"
+          element={
+            <Articles
+              articles={articles}
+              setArticles={setArticles}
+              user={user}
+              setUser={setUser}
+            />
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
