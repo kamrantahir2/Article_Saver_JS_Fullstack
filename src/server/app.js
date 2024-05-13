@@ -22,8 +22,6 @@ mongoose
     console.log("error connecting to MongoDB: ", error.message);
   });
 
-// MIDDLEWARE FUNCTIONS
-
 app.use(cors());
 app.use(express.static("dist"));
 app.use(express.json());
