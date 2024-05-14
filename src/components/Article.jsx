@@ -1,16 +1,17 @@
-import Togglable from "./Togglable.jsx";
-import { useRef } from "react";
 import articleService from "../service/articles.js";
-import { useParams } from "react-router-dom";
+import { useMatch } from "react-router-dom";
 import UpdateArticle from "./UpdateArticle.jsx";
 import { useNavigate } from "react-router-dom";
 
 const Article = ({ articles, setArticles, user, setUser }) => {
   const navigate = useNavigate();
 
-  const id = useParams().id;
+  const match = useMatch("/articles/:id");
+  const article = match ? articles.find((a) => a.id === match.params.id) : null;
 
-  const article = articles.find((a) => a.id === id);
+  if (!article) {
+    return <div>Loading...</div>;
+  }
 
   const handleDelete = async (id) => {
     try {
@@ -27,31 +28,33 @@ const Article = ({ articles, setArticles, user, setUser }) => {
   };
 
   return (
-    <div key={article.id}>
-      <h3>{article.title}</h3>
+    <>
+      <div key={article.id}>
+        <h3>{article.title}</h3>
 
-      <h5>
-        URL:{" "}
-        <a href={article.url} rel="noopener" target="_blank">
-          {article.url}
-        </a>
-      </h5>
-      <h5>Description: {article.description}</h5>
-      <h5>Favourite: {article.favourite.toString()}</h5>
-      <h5>User: {article.user.username}</h5>
-      {user.username === article.user.username && (
-        <button onClick={() => handleDelete(article.id)}>Delete</button>
-      )}
-      {user.username === article.user.username && (
-        <UpdateArticle
-          articles={articles}
-          setArticles={setArticles}
-          article={article}
-          user={user}
-          setUser={setUser}
-        />
-      )}
-    </div>
+        <h5>
+          URL:{" "}
+          <a href={article.url} rel="noopener" target="_blank">
+            {article.url}
+          </a>
+        </h5>
+        <h5>Description: {article.description}</h5>
+        <h5>Favourite: {article.favourite.toString()}</h5>
+        <h5>User: {article.user.username}</h5>
+        {user.username === article.user.username && (
+          <button onClick={() => handleDelete(article.id)}>Delete</button>
+        )}
+        {user.username === article.user.username && (
+          <UpdateArticle
+            articles={articles}
+            setArticles={setArticles}
+            article={article}
+            user={user}
+            setUser={setUser}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

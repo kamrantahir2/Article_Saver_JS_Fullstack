@@ -37,7 +37,7 @@ function App() {
   }, [articles]);
 
   return (
-    <Router>
+    <div>
       <div>
         <Link className="link" to="/">
           All Articles
@@ -124,7 +124,7 @@ function App() {
       </Routes>
 
       {user && <LogoutButton setUser={setUser} />}
-    </Router>
+    </div>
   );
 }
 
