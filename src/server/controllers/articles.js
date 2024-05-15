@@ -5,6 +5,7 @@ import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
+import { useNavigate } from "react-router-dom";
 
 const getTokenFrom = (request) => {
   const authorization = request.get("authorization");
@@ -154,7 +155,10 @@ articlesRouter.put("/:id", async (request, response, next) => {
       new: true,
       runValidators: true,
       context: "query",
-    });
+    }).populate("user", { username: 1, name: 1 });
+
+    // const foundUpdatedArticle = await ;
+
     response.json(updatedArticle);
   } catch (error) {
     next(error);

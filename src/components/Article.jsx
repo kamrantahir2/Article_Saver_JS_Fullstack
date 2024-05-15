@@ -3,6 +3,33 @@ import { useMatch } from "react-router-dom";
 import UpdateArticle from "./UpdateArticle.jsx";
 import { useNavigate } from "react-router-dom";
 
+const LoggedInComponents = ({
+  articles,
+  setArticles,
+  user,
+  setUser,
+  article,
+}) => {
+  if (user) {
+    return (
+      <div>
+        {user.username === article.user.username && (
+          <button onClick={() => handleDelete(article.id)}>Delete</button>
+        )}
+        {user.username === article.user.username && (
+          <UpdateArticle
+            articles={articles}
+            setArticles={setArticles}
+            article={article}
+            user={user}
+            setUser={setUser}
+          />
+        )}
+      </div>
+    );
+  }
+};
+
 const Article = ({ articles, setArticles, user, setUser }) => {
   const navigate = useNavigate();
 
@@ -41,18 +68,13 @@ const Article = ({ articles, setArticles, user, setUser }) => {
         <h5>Description: {article.description}</h5>
         <h5>Favourite: {article.favourite.toString()}</h5>
         <h5>User: {article.user.username}</h5>
-        {user.username === article.user.username && (
-          <button onClick={() => handleDelete(article.id)}>Delete</button>
-        )}
-        {user.username === article.user.username && (
-          <UpdateArticle
-            articles={articles}
-            setArticles={setArticles}
-            article={article}
-            user={user}
-            setUser={setUser}
-          />
-        )}
+        <LoggedInComponents
+          articles={articles}
+          setArticles={setArticles}
+          user={user}
+          setUser={setUser}
+          article={article}
+        />
       </div>
     </>
   );
