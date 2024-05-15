@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import articleService from "./service/articles";
 import Articles from "./components/Articles";
@@ -8,17 +8,14 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Article from "./components/Article.jsx";
 import LogoutButton from "./components/LogoutButton.jsx";
 import ArticleForm from "./components/ArticleForm.jsx";
+import Notification from "./components/Notification.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
   const [user, setUser] = useState(null);
   const [myArticles, setMyArticles] = useState([]);
-
-  useEffect(() => {
-    articleService.getAll().then((response) => {
-      setArticles(response);
-    });
-  }, []);
+  const [message, setMessage] = useState(null);
+  // const notificationRef = useRef();
 
   useEffect(() => {
     const loggedUserJson = window.localStorage.getItem("loggedArticleAppUser");
@@ -31,13 +28,27 @@ function App() {
   }, []);
 
   useEffect(() => {
+    articleService.getAll().then((response) => {
+      setArticles(response);
+    });
+  }, []);
+
+  useEffect(() => {
     setMyArticles(
       user ? articles.filter((a) => a.user.username === user.username) : []
     );
-  }, [articles]);
+  }, []);
+
+  const setNotificationMessage = (msg) => {
+    setMessage(msg);
+    setTimeout(() => {
+      setMessage(null);
+    }, 5000);
+  };
 
   return (
     <div>
+      <Notification message={message} />
       <div>
         <Link className="link" to="/">
           All Articles
@@ -80,7 +91,10 @@ function App() {
           path="/login"
           element={
             <div>
-              <LoginForm setUser={setUser} />
+              <LoginForm
+                setUser={setUser}
+                setNotificationMessage={setNotificationMessage}
+              />
               <UserForm setUser={setUser} />
             </div>
           }

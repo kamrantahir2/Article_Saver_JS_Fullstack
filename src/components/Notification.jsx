@@ -18,7 +18,7 @@ const Notification = forwardRef((props, refs) => {
 
   return (
     <div>
-      <p>{message}</p>
+      <p>{props.message}</p>
     </div>
   );
 });

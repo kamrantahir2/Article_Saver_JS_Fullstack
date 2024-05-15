@@ -3,7 +3,7 @@ import loginService from "../service/login.js";
 import articleService from "../service/articles.js";
 import { useNavigate } from "react-router-dom";
 
-const LoginForm = ({ setUser }) => {
+const LoginForm = ({ setUser, setNotificationMessage }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,6 +26,7 @@ const LoginForm = ({ setUser }) => {
     setUsername("");
     setPassword("");
     navigate("/");
+    setNotificationMessage(`Logged in as ${user.username}`);
   };
 
   return (

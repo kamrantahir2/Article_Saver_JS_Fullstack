@@ -6,7 +6,7 @@ import User from "../server/models/user";
 import userService from "../service/users";
 import { Link } from "react-router-dom";
 
-const Articles = ({ articles, setArticles, user, setUser }) => {
+const Articles = ({ articles, setArticles, user, setUser, setMessage }) => {
   return (
     <div>
       <h2>Articles</h2>
