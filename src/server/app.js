@@ -30,7 +30,7 @@ app.use("/api/articles", articlesRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
 
-app.use(middleware.unkownEndpoint);
+// app.use(middleware.unkownEndpoint);
 app.use(middleware.errorHandler);
 
 export default app;
