@@ -26,7 +26,7 @@ const LoginForm = ({ setUser, setNotificationMessage }) => {
     setUsername("");
     setPassword("");
     navigate("/");
-    setNotificationMessage(`Logged in as ${user.username}`);
+    setNotificationMessage(`Logged in as ${user.username}`, "info");
   };
 
   return (

@@ -15,7 +15,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [myArticles, setMyArticles] = useState([]);
   const [message, setMessage] = useState(null);
-  // const notificationRef = useRef();
+  const [styling, setStyling] = useState(null);
 
   useEffect(() => {
     const loggedUserJson = window.localStorage.getItem("loggedArticleAppUser");
@@ -39,16 +39,18 @@ function App() {
     );
   }, []);
 
-  const setNotificationMessage = (msg) => {
+  const setNotificationMessage = (msg, styling) => {
     setMessage(msg);
+    setStyling(styling);
     setTimeout(() => {
       setMessage(null);
+      setStyling(null);
     }, 5000);
   };
 
   return (
     <div>
-      <Notification message={message} />
+      <Notification message={message} styling={styling} />
       <div>
         <Link className="link" to="/">
           All Articles

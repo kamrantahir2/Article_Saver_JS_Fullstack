@@ -1,26 +1,11 @@
 import { useState, useImperativeHandle, forwardRef } from "react";
 
-const Notification = forwardRef((props, refs) => {
-  const [message, setMessage] = useState(null);
-
-  const setNotificationMessage = (msg) => {
-    setMessage(msg);
-    setTimeout(() => {
-      setMessage(null);
-    }, 5000);
-  };
-
-  useImperativeHandle(refs, () => {
-    return {
-      setNotificationMessage,
-    };
-  });
-
+const Notification = ({ message, styling }) => {
   return (
-    <div>
-      <p>{props.message}</p>
+    <div className={styling}>
+      <p>{message}</p>
     </div>
   );
-});
+};
 
 export default Notification;
