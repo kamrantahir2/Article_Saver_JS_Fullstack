@@ -5,19 +5,6 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -33,16 +20,12 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 button {
   margin-top: 10px;
+}
+
+h2 {
+  text-decoration: underline;
 }
 
 .link {
@@ -71,4 +54,25 @@ button {
   border-radius: 30px;
   margin-bottom: 10px;
   border: 3px solid red;
+}
+
+.top-info {
+  background-color: black;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid blue;
+}
+
+.login-info {
+  display: inline-flex;
+  text-align: center;
+  /* padding-left: 8rem; */
+}
+
+.close-btn {
+  background-color: transparent;
 }

@@ -9,6 +9,7 @@ import Article from "./components/Article.jsx";
 import LogoutButton from "./components/LogoutButton.jsx";
 import ArticleForm from "./components/ArticleForm.jsx";
 import Notification from "./components/Notification.jsx";
+import NotLoggedInInfo from "./components/NotLoggedInInfo.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -24,8 +25,6 @@ function App() {
       const user = JSON.parse(loggedUserJson);
       setUser(user);
       articleService.setToken(user.token);
-    } else {
-      setNotificationMessage("Please log in for full access", "info");
     }
   }, []);
 
@@ -52,6 +51,7 @@ function App() {
 
   return (
     <div>
+      {!user && <NotLoggedInInfo />}
       <Notification message={message} styling={styling} />
       <div>
         <Link className="link" to="/">
