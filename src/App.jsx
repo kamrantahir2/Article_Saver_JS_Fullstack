@@ -24,6 +24,8 @@ function App() {
       const user = JSON.parse(loggedUserJson);
       setUser(user);
       articleService.setToken(user.token);
+    } else {
+      setNotificationMessage("Please log in for full access", "info");
     }
   }, []);
 

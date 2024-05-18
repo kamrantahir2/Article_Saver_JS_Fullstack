@@ -54,6 +54,14 @@ button {
   background-color: black;
   border-radius: 30px;
   margin-bottom: 10px;
+  border: 3px solid #0bcad4;
+}
+
+.success {
+  padding: 20px;
+  background-color: black;
+  border-radius: 30px;
+  margin-bottom: 10px;
   border: 3px solid green;
 }
 
