@@ -141,7 +141,12 @@ function App() {
         />
       </Routes>
 
-      {user && <LogoutButton setUser={setUser} />}
+      {user && (
+        <LogoutButton
+          setUser={setUser}
+          setNotificationMessage={setNotificationMessage}
+        />
+      )}
     </div>
   );
 }

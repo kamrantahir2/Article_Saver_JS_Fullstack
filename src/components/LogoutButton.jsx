@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 
-const LogoutButton = ({ setUser }) => {
+const LogoutButton = ({ setUser, setNotificationMessage }) => {
   const navigate = useNavigate();
 
   const handleLogout = (event) => {
     event.preventDefault();
     window.localStorage.removeItem("loggedArticleAppUser");
-    navigate("/login");
     setUser(null);
+    setNotificationMessage("You have successfully logged out", "info");
+    navigate("/");
   };
   return (
     <button className="btn" onClick={handleLogout}>

@@ -12,21 +12,23 @@ const LoginForm = ({ setUser, setNotificationMessage }) => {
   const handleLogin = async (event) => {
     event.preventDefault();
 
-    const user = await loginService.login({ username, password });
+    try {
+      const user = await loginService.login({ username, password });
 
-    window.localStorage.setItem("loggedArticleAppUser", JSON.stringify(user));
+      window.localStorage.setItem("loggedArticleAppUser", JSON.stringify(user));
 
-    articleService.setToken(user.token);
-    setUser(user);
+      articleService.setToken(user.token);
+      setUser(user);
 
-    if (!user) {
-      console.log("Wrong username or password");
+      setUsername("");
+      setPassword("");
+      navigate("/");
+      setNotificationMessage(`Logged in as ${user.username}`, "success");
+    } catch (error) {
+      setNotificationMessage("Wrong username or password", "error");
+      setUsername("");
+      setPassword("");
     }
-
-    setUsername("");
-    setPassword("");
-    navigate("/");
-    setNotificationMessage(`Logged in as ${user.username}`, "success");
   };
 
   return (
