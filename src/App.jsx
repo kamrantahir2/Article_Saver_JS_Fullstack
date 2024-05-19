@@ -25,6 +25,7 @@ function App() {
       const user = JSON.parse(loggedUserJson);
       setUser(user);
       articleService.setToken(user.token);
+      setMyArticles(articles.filter((a) => a.user.username === user.username));
     }
   }, []);
 
@@ -38,10 +39,7 @@ function App() {
     setMyArticles(
       user ? articles.filter((a) => a.user.username === user.username) : []
     );
-  }, []);
-
-  console.log("USER: ", user);
-  console.log("My Articles: ", myArticles);
+  }, [user]);
 
   const setNotificationMessage = (msg, styling) => {
     setMessage(msg);
