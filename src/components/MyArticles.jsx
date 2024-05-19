@@ -5,9 +5,7 @@ const MyArticles = ({ articles, setArticles, user, setUser }) => {
   const [myArticles, setMyArticles] = useState([]);
 
   useEffect(() => {
-    setMyArticles(
-      user ? articles.filter((a) => a.user.username === user.username) : []
-    );
+    setMyArticles(articles.filter((a) => a.user.username === user.username));
   }, []);
 
   return (
