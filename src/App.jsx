@@ -10,6 +10,7 @@ import LogoutButton from "./components/LogoutButton.jsx";
 import ArticleForm from "./components/ArticleForm.jsx";
 import Notification from "./components/Notification.jsx";
 import NotLoggedInInfo from "./components/NotLoggedInInfo.jsx";
+import MyArticles from "./components/MyArticles.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -33,12 +34,6 @@ function App() {
       setArticles(response);
     });
   }, []);
-
-  useEffect(() => {
-    setMyArticles(
-      user ? articles.filter((a) => a.user.username === user.username) : []
-    );
-  }, [user]);
 
   const setNotificationMessage = (msg, styling) => {
     setMessage(msg);
@@ -119,8 +114,8 @@ function App() {
         <Route
           path="/my_articles"
           element={
-            <Articles
-              articles={myArticles}
+            <MyArticles
+              articles={articles}
               setArticles={setArticles}
               user={user}
               setUser={setUser}

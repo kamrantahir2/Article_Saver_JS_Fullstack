@@ -9,6 +9,7 @@ const LoggedInComponents = ({
   user,
   setUser,
   article,
+  handleDelete,
 }) => {
   if (user) {
     return (
@@ -74,6 +75,7 @@ const Article = ({ articles, setArticles, user, setUser }) => {
           user={user}
           setUser={setUser}
           article={article}
+          handleDelete={handleDelete}
         />
       </div>
     </>
