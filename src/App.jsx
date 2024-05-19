@@ -40,6 +40,9 @@ function App() {
     );
   }, []);
 
+  console.log("USER: ", user);
+  console.log("My Articles: ", myArticles);
+
   const setNotificationMessage = (msg, styling) => {
     setMessage(msg);
     setStyling(styling);
