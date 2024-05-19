@@ -40,4 +40,11 @@ const deleteArticle = (id) => {
   return request.then((response) => response.data);
 };
 
-export default { getAll, create, update, deleteArticle, setToken, getById };
+export default {
+  getAll,
+  create,
+  update,
+  deleteArticle,
+  setToken,
+  getById,
+};
