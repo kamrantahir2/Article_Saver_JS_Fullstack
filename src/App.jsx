@@ -25,7 +25,6 @@ function App() {
       const user = JSON.parse(loggedUserJson);
       setUser(user);
       articleService.setToken(user.token);
-      setMyArticles(articles.filter((a) => a.user.username === user.username));
     }
   }, []);
 
