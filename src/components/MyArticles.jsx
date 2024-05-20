@@ -1,12 +1,7 @@
-import { useState, useEffect } from "react";
-import Articles from "./Articles.jsx";
+import Articles from "./Articles";
 
 const MyArticles = ({ articles, setArticles, user, setUser }) => {
-  const [myArticles, setMyArticles] = useState([]);
-
-  useEffect(() => {
-    setMyArticles(articles.filter((a) => a.user.username === user.username));
-  }, []);
+  const myArticles = articles.filter((a) => a.user.username === user.username);
 
   return (
     <Articles

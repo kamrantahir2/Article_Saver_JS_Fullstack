@@ -15,7 +15,6 @@ import MyArticles from "./components/MyArticles.jsx";
 function App() {
   const [articles, setArticles] = useState([]);
   const [user, setUser] = useState(null);
-  const [myArticles, setMyArticles] = useState([]);
   const [message, setMessage] = useState(null);
   const [styling, setStyling] = useState(null);
 
