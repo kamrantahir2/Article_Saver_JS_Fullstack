@@ -93,7 +93,10 @@ function App() {
                 setUser={setUser}
                 setNotificationMessage={setNotificationMessage}
               />
-              <UserForm setUser={setUser} />
+              <UserForm
+                setUser={setUser}
+                setNotificationMessage={setNotificationMessage}
+              />
             </div>
           }
         />

@@ -28,7 +28,6 @@ const ArticleForm = ({
       const savedArticle = await articleService.create(newArticle);
 
       setArticles(articles.concat(savedArticle));
-      console.log(savedArticle);
       setTitle("");
       setDescription("");
       setUrl("");

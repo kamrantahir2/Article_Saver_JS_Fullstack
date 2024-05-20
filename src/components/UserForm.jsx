@@ -5,7 +5,7 @@ import loginService from "../service/login.js";
 import articleService from "../service/articles.js";
 import { useNavigate } from "react-router-dom";
 
-const UserForm = ({ setUser }) => {
+const UserForm = ({ setUser, setNotificationMessage }) => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -39,6 +39,7 @@ const UserForm = ({ setUser }) => {
     setName("");
     setPassword("");
     navigate("/");
+    setNotificationMessage("User created successfully", "success");
   };
 
   return (
