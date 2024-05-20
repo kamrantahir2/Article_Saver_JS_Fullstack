@@ -106,6 +106,7 @@ function App() {
               setArticles={setArticles}
               user={user}
               setUser={setUser}
+              setNotificationMessage={setNotificationMessage}
             />
           }
         />
@@ -130,6 +131,7 @@ function App() {
               setArticles={setArticles}
               user={user}
               setUser={setUser}
+              setNotificationMessage={setNotificationMessage}
             />
           }
         />

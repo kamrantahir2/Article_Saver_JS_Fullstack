@@ -10,6 +10,7 @@ const LoggedInComponents = ({
   setUser,
   article,
   handleDelete,
+  setNotificationMessage,
 }) => {
   if (user) {
     return (
@@ -31,7 +32,13 @@ const LoggedInComponents = ({
   }
 };
 
-const Article = ({ articles, setArticles, user, setUser }) => {
+const Article = ({
+  articles,
+  setArticles,
+  user,
+  setUser,
+  setNotificationMessage,
+}) => {
   const navigate = useNavigate();
 
   const match = useMatch("/articles/:id");
@@ -47,10 +54,15 @@ const Article = ({ articles, setArticles, user, setUser }) => {
       const newArticles = await articleService.getAll();
       setArticles(newArticles);
       navigate("/my_articles");
+      setNotificationMessage("Article successfully deleted", "success");
     } catch (error) {
       if (error.response.data.error.includes("Token Expired")) {
         window.localStorage.removeItem("loggedArticleAppUser");
         setUser(null);
+        setNotificationMessage(
+          "Login expired, please log in and try again",
+          "error"
+        );
       }
     }
   };
@@ -76,6 +88,7 @@ const Article = ({ articles, setArticles, user, setUser }) => {
           setUser={setUser}
           article={article}
           handleDelete={handleDelete}
+          setNotificationMessage={setNotificationMessage}
         />
       </div>
     </>

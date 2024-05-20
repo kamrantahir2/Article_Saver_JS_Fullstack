@@ -2,7 +2,13 @@ import { useState, useRef } from "react";
 import articleService from "../service/articles";
 import { useNavigate } from "react-router-dom";
 
-const ArticleForm = ({ setArticles, articles, user, setUser }) => {
+const ArticleForm = ({
+  setArticles,
+  articles,
+  user,
+  setUser,
+  setNotificationMessage,
+}) => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -22,16 +28,24 @@ const ArticleForm = ({ setArticles, articles, user, setUser }) => {
       const savedArticle = await articleService.create(newArticle);
 
       setArticles(articles.concat(savedArticle));
-
+      console.log(savedArticle);
       setTitle("");
       setDescription("");
       setUrl("");
       navigate("/my_articles");
+      setNotificationMessage(
+        `Article '${savedArticle.title}' saved`,
+        "success"
+      );
     } catch (error) {
       console.log(error);
       if (error.response.data.error.includes("Token Expired")) {
         window.localStorage.removeItem("loggedArticleAppUser");
         setUser(null);
+        setNotificationMessage(
+          "Login expired, please log in and try again",
+          "error"
+        );
       }
     }
   };
