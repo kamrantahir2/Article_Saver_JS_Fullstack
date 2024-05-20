@@ -2,7 +2,14 @@ import { useState, useRef } from "react";
 import Togglable from "./Togglable";
 import articleService from "../service/articles";
 
-const UpdateArticle = ({ article, articles, setArticles, user, setUser }) => {
+const UpdateArticle = ({
+  article,
+  articles,
+  setArticles,
+  user,
+  setUser,
+  setNotificationMessage,
+}) => {
   const [title, setTitle] = useState(article.title);
   const [description, setDescription] = useState(article.description);
   const [url, setUrl] = useState(article.url);
@@ -26,10 +33,15 @@ const UpdateArticle = ({ article, articles, setArticles, user, setUser }) => {
         articles.map((a) => (a.id !== returnedArticle.id ? a : returnedArticle))
       );
       updatedArticleRef.current.toggleVisibility();
+      setNotificationMessage(`Article '${article.title}' updated`, "success");
     } catch (error) {
       if (error.response.data.error.includes("Token Expired")) {
         window.localStorage.removeItem("loggedArticleAppUser");
         setUser(null);
+        setNotificationMessage(
+          "Login expired, please log in and try again",
+          "error"
+        );
       }
     }
   };

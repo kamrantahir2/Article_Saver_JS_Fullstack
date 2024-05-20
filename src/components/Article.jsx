@@ -25,6 +25,7 @@ const LoggedInComponents = ({
             article={article}
             user={user}
             setUser={setUser}
+            setNotificationMessage={setNotificationMessage}
           />
         )}
       </div>
