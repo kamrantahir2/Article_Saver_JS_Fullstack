@@ -45,6 +45,11 @@ const saveArticle = (id) => {
   return request.then((response) => response.data);
 };
 
+const unsaveArticle = (id) => {
+  const request = axios.put(`${baseUrl}/unsaveArticle/${id}`, {}, config());
+  return request.then((response) => response.data);
+};
+
 export default {
   getAll,
   create,
@@ -53,4 +58,5 @@ export default {
   setToken,
   getById,
   saveArticle,
+  unsaveArticle,
 };

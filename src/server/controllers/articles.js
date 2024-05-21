@@ -150,7 +150,31 @@ articlesRouter.post("/saveArticle/:id", async (request, response, next) => {
   }
 });
 
-articlesRouter.put("/unsaveArticle/:id", (request, response, next) => {});
+articlesRouter.put("/unsaveArticle/:id", async (request, response, next) => {
+  try {
+    const articleId = request.params.id;
+
+    const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+
+    if (!decodedToken.id) {
+      return response.status(401).json({ error: "token invalid" });
+    }
+
+    const user = await User.findById(decodedToken.id).populate("saved", {
+      title: 1,
+      description: 1,
+      url: 1,
+    });
+
+    user.saved = user.saved.filter((article) => article.id !== articleId);
+
+    await user.save();
+
+    response.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
 
 articlesRouter.put("/:id", async (request, response, next) => {
   try {

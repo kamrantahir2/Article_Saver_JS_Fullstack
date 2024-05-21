@@ -57,12 +57,15 @@ const Article = ({
   user,
   setUser,
   setNotificationMessage,
+  setSavedArticles,
 }) => {
   const navigate = useNavigate();
 
   const handleSave = async (id) => {
     try {
-      await articleService.saveArticle(id);
+      const updatedUser = await articleService.saveArticle(id);
+      setUser(updatedUser);
+      console.log(updatedUser);
       setNotificationMessage(`Article saved`, "success");
     } catch (error) {
       if (error.response.data.error.includes("Token Expired")) {
@@ -85,30 +88,28 @@ const Article = ({
   }
 
   return (
-    <>
-      <div key={article.id}>
-        <h3>{article.title}</h3>
+    <div key={article.id}>
+      <h3>{article.title}</h3>
 
-        <h5>
-          URL:{" "}
-          <a href={article.url} rel="noopener" target="_blank">
-            {article.url}
-          </a>
-        </h5>
-        <h5>Description: {article.description}</h5>
-        <h5>Favourite: {article.favourite.toString()}</h5>
-        <h5>User: {article.user.username}</h5>
-        <LoggedInComponents
-          articles={articles}
-          setArticles={setArticles}
-          user={user}
-          setUser={setUser}
-          article={article}
-          setNotificationMessage={setNotificationMessage}
-        />
-        <button onClick={() => handleSave(article.id)}>Save</button>
-      </div>
-    </>
+      <h5>
+        URL:{" "}
+        <a href={article.url} rel="noopener" target="_blank">
+          {article.url}
+        </a>
+      </h5>
+      <h5>Description: {article.description}</h5>
+      <h5>Favourite: {article.favourite.toString()}</h5>
+      <h5>Saved by: {article.user.username}</h5>
+      <LoggedInComponents
+        articles={articles}
+        setArticles={setArticles}
+        user={user}
+        setUser={setUser}
+        article={article}
+        setNotificationMessage={setNotificationMessage}
+      />
+      <button onClick={() => handleSave(article.id)}>Save</button>
+    </div>
   );
 };
 

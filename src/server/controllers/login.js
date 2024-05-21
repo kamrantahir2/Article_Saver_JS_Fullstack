@@ -10,7 +10,11 @@ loginRouter.post("/", async (request, response) => {
   const { username, password } = request.body;
   const lowercase = username.toLowerCase();
 
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username }).populate("saved", {
+    title: 1,
+    description: 1,
+    url: 1,
+  });
 
   const passwordCorrect =
     user === null ? false : await bcrypt.compare(password, user.passwordHash);
@@ -28,9 +32,13 @@ loginRouter.post("/", async (request, response) => {
     expiresIn: 60 * 60,
   });
 
-  response
-    .status(200)
-    .send({ token, username: user.username, name: user.name });
+  response.status(200).send({
+    token,
+    username: user.username,
+    name: user.name,
+    id: user._id,
+    savedArticles: user.saved,
+  });
 });
 
 export default loginRouter;

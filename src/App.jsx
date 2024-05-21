@@ -11,12 +11,16 @@ import ArticleForm from "./components/ArticleForm.jsx";
 import Notification from "./components/Notification.jsx";
 import NotLoggedInInfo from "./components/NotLoggedInInfo.jsx";
 import MyArticles from "./components/MyArticles.jsx";
+import SavedArticles from "./components/SavedArticles.jsx";
+import usersService from "./service/users.js";
+// import SavedArticle from "./components/SavedArticle.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
   const [styling, setStyling] = useState(null);
+  const [savedArticles, setSavedArticles] = useState([]);
 
   useEffect(() => {
     const loggedUserJson = window.localStorage.getItem("loggedArticleAppUser");
@@ -24,9 +28,15 @@ function App() {
     if (loggedUserJson) {
       const user = JSON.parse(loggedUserJson);
       setUser(user);
+      console.log("App.jsx: ", user);
       articleService.setToken(user.token);
+      setSavedArticles(user.savedArticles);
     }
   }, []);
+
+  // useEffect(() => {
+  //   usersService.getUserById(user.id).then((response) => {});
+  // }, []);
 
   useEffect(() => {
     articleService.getAll().then((response) => {
@@ -57,10 +67,16 @@ function App() {
           </Link>
         )}
         {user && (
+          <Link className="link" to="/bookmark">
+            Bookmark
+          </Link>
+        )}
+        {user && (
           <Link className="link" to="/add_new">
             Add New Article
           </Link>
         )}
+
         {user ? (
           <div>
             <em>{user.name} logged in</em>
@@ -110,6 +126,20 @@ function App() {
               user={user}
               setUser={setUser}
               setNotificationMessage={setNotificationMessage}
+              setSavedArticles={setSavedArticles}
+            />
+          }
+        />
+
+        <Route
+          path="/bookmark"
+          element={
+            <SavedArticles
+              savedArticles={savedArticles}
+              setSavedArticles={setSavedArticles}
+              setUser={setUser}
+              setNotificationMessage={setNotificationMessage}
+              user={user}
             />
           }
         />

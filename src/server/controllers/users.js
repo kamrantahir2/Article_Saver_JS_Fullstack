@@ -10,7 +10,11 @@ usersRouter.get("/", async (request, response) => {
 
 usersRouter.get("/:id", async (request, response) => {
   const id = request.params.id;
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate("saved", {
+    title: 1,
+    description: 1,
+    url: 1,
+  });
   response.json(user);
 });
 
