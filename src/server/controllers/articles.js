@@ -156,10 +156,9 @@ articlesRouter.put("/:id", async (request, response, next) => {
       context: "query",
     }).populate("user", { username: 1, name: 1 });
 
-    // const foundUpdatedArticle = await ;
-
     response.json(updatedArticle);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 });

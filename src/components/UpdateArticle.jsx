@@ -42,6 +42,11 @@ const UpdateArticle = ({
           "Login expired, please log in and try again",
           "error"
         );
+      } else if (error.response.data.error.includes("Validation error")) {
+        setNotificationMessage(
+          "Title and URL must be longer than 3 characters",
+          "error"
+        );
       }
     }
   };

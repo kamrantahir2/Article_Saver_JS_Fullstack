@@ -37,12 +37,18 @@ const ArticleForm = ({
         "success"
       );
     } catch (error) {
-      console.log(error);
       if (error.response.data.error.includes("Token Expired")) {
         window.localStorage.removeItem("loggedArticleAppUser");
         setUser(null);
         setNotificationMessage(
           "Login expired, please log in and try again",
+          "error"
+        );
+      } else if (error.response.data.error.includes("missing content")) {
+        setNotificationMessage("Article must have a title and URL", "error");
+      } else if (error.response.data.error.includes("Validation error")) {
+        setNotificationMessage(
+          "Title and URL must be longer than 3 characters",
           "error"
         );
       }
