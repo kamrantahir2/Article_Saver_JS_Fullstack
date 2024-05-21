@@ -114,6 +114,44 @@ articlesRouter.post("/", async (request, response, next) => {
   }
 });
 
+articlesRouter.post("/saveArticle/:id", async (request, response, next) => {
+  try {
+    const articleId = request.params.id;
+
+    const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+
+    if (!decodedToken.id) {
+      return response.status(401).json({ error: "token invalid" });
+    }
+
+    const user = await User.findById(decodedToken.id);
+
+    const foundArticle = await Article.findById(articleId).populate("user", {
+      username: 1,
+      name: 1,
+    });
+
+    user.saved = user.saved.concat(foundArticle);
+
+    await user.save();
+
+    const returnedUser = await User.findById(decodedToken.id).populate(
+      "saved",
+      {
+        title: 1,
+        description: 1,
+        url: 1,
+      }
+    );
+
+    response.json(returnedUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
+articlesRouter.put("/unsaveArticle/:id", (request, response, next) => {});
+
 articlesRouter.put("/:id", async (request, response, next) => {
   try {
     const body = request.body;

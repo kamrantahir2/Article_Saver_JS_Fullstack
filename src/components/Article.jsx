@@ -9,10 +9,28 @@ const LoggedInComponents = ({
   user,
   setUser,
   article,
-  handleDelete,
   setNotificationMessage,
 }) => {
   if (user) {
+    const handleDelete = async (id) => {
+      try {
+        await articleService.deleteArticle(id);
+        const newArticles = await articleService.getAll();
+        setArticles(newArticles);
+        navigate("/my_articles");
+        setNotificationMessage("Article successfully deleted", "success");
+      } catch (error) {
+        if (error.response.data.error.includes("Token Expired")) {
+          window.localStorage.removeItem("loggedArticleAppUser");
+          setUser(null);
+          setNotificationMessage(
+            "Login expired, please log in and try again",
+            "error"
+          );
+        }
+      }
+    };
+
     return (
       <div>
         {user.username === article.user.username && (
@@ -42,20 +60,10 @@ const Article = ({
 }) => {
   const navigate = useNavigate();
 
-  const match = useMatch("/articles/:id");
-  const article = match ? articles.find((a) => a.id === match.params.id) : null;
-
-  if (!article) {
-    return <div>Loading...</div>;
-  }
-
-  const handleDelete = async (id) => {
+  const handleSave = async (id) => {
     try {
-      await articleService.deleteArticle(id);
-      const newArticles = await articleService.getAll();
-      setArticles(newArticles);
-      navigate("/my_articles");
-      setNotificationMessage("Article successfully deleted", "success");
+      await articleService.saveArticle(id);
+      setNotificationMessage(`Article saved`, "success");
     } catch (error) {
       if (error.response.data.error.includes("Token Expired")) {
         window.localStorage.removeItem("loggedArticleAppUser");
@@ -64,9 +72,17 @@ const Article = ({
           "Login expired, please log in and try again",
           "error"
         );
+        navigate("/login");
       }
     }
   };
+
+  const match = useMatch("/articles/:id");
+  const article = match ? articles.find((a) => a.id === match.params.id) : null;
+
+  if (!article) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -88,9 +104,9 @@ const Article = ({
           user={user}
           setUser={setUser}
           article={article}
-          handleDelete={handleDelete}
           setNotificationMessage={setNotificationMessage}
         />
+        <button onClick={() => handleSave(article.id)}>Save</button>
       </div>
     </>
   );

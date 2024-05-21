@@ -40,6 +40,11 @@ const deleteArticle = (id) => {
   return request.then((response) => response.data);
 };
 
+const saveArticle = (id) => {
+  const request = axios.post(`${baseUrl}/saveArticle/${id}`, {}, config());
+  return request.then((response) => response.data);
+};
+
 export default {
   getAll,
   create,
@@ -47,4 +52,5 @@ export default {
   deleteArticle,
   setToken,
   getById,
+  saveArticle,
 };
