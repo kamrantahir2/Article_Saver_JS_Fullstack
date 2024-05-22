@@ -16,6 +16,7 @@ const SavedArticles = ({
     try {
       await setSavedArticles(savedArticles.filter((a) => a.id !== id));
       await articleService.unsaveArticle(id);
+      setNotificationMessage(`Article bookmark removed`, "success");
     } catch (error) {
       if (error.response.data.error.includes("Token Expired")) {
         window.localStorage.removeItem("loggedArticleAppUser");
@@ -35,7 +36,7 @@ const SavedArticles = ({
 
   return (
     <div>
-      <h2>Articles</h2>
+      <h2>Bookmarked Articles</h2>
       {savedArticles.map((article) => (
         <div key={article.id}>
           <h3>{article.title}</h3>

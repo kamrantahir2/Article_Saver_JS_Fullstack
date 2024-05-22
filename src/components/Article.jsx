@@ -59,18 +59,25 @@ const Article = ({
   setUser,
   setNotificationMessage,
   setSavedArticles,
+  savedArticles,
 }) => {
   const navigate = useNavigate();
 
   const handleSave = async (id) => {
     try {
-      const updatedUser = await articleService.saveArticle(id);
+      const foundArticle = savedArticles.find((a) => a.id === id);
 
-      userService.getUserById(updatedUser.id).then((response) => {
-        setSavedArticles(response.saved);
-      });
+      if (!foundArticle) {
+        const updatedUser = await articleService.saveArticle(id);
 
-      setNotificationMessage(`Article saved`, "success");
+        userService.getUserById(updatedUser.id).then((response) => {
+          setSavedArticles(response.saved);
+        });
+
+        setNotificationMessage(`Article saved`, "success");
+      } else {
+        setNotificationMessage(`Article has already been bookmarked`, "error");
+      }
     } catch (error) {
       if (error.response.data.error.includes("Token Expired")) {
         window.localStorage.removeItem("loggedArticleAppUser");

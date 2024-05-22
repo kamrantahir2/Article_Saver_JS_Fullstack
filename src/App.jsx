@@ -128,6 +128,7 @@ function App() {
               setUser={setUser}
               setNotificationMessage={setNotificationMessage}
               setSavedArticles={setSavedArticles}
+              savedArticles={savedArticles}
             />
           }
         />
