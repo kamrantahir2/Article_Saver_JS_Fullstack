@@ -65,7 +65,6 @@ const Article = ({
     try {
       const updatedUser = await articleService.saveArticle(id);
       setUser(updatedUser);
-      console.log(updatedUser);
       setNotificationMessage(`Article saved`, "success");
     } catch (error) {
       if (error.response.data.error.includes("Token Expired")) {

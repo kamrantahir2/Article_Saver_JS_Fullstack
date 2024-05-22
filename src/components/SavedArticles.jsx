@@ -1,6 +1,7 @@
 import articleService from "../service/articles.js";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import userService from "../service/users.js";
 
 const SavedArticles = ({
   savedArticles,
@@ -13,9 +14,8 @@ const SavedArticles = ({
 
   const handleRemove = async (id) => {
     try {
-      const updatedUser = await articleService.unsaveArticle(id);
-      setUser(updatedUser);
-      setSavedArticles(updatedUser.saved);
+      await setSavedArticles(savedArticles.filter((a) => a.id !== id));
+      await articleService.unsaveArticle(id);
     } catch (error) {
       if (error.response.data.error.includes("Token Expired")) {
         window.localStorage.removeItem("loggedArticleAppUser");
@@ -28,6 +28,11 @@ const SavedArticles = ({
       }
     }
   };
+
+  if (!savedArticles) {
+    return <div>loading...</div>;
+  }
+
   return (
     <div>
       <h2>Articles</h2>

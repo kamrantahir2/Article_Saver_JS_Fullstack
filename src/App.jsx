@@ -27,10 +27,11 @@ function App() {
 
     if (loggedUserJson) {
       const user = JSON.parse(loggedUserJson);
+      usersService.getUserById(user.id).then((response) => {
+        setSavedArticles(response.saved);
+      });
       setUser(user);
-      console.log("App.jsx: ", user);
       articleService.setToken(user.token);
-      setSavedArticles(user.savedArticles);
     }
   }, []);
 
