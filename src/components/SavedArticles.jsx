@@ -12,6 +12,20 @@ const SavedArticles = ({
 }) => {
   const navigate = useNavigate();
 
+  const [search, setSearch] = useState(savedArticles);
+
+  useEffect(() => {
+    setSearch(savedArticles);
+  }, [savedArticles]);
+
+  const handleSearch = (event) => {
+    setSearch(
+      savedArticles.filter((a) =>
+        a.title.toLowerCase().includes(event.target.value.toLowerCase())
+      )
+    );
+  };
+
   const handleRemove = async (id) => {
     try {
       await setSavedArticles(savedArticles.filter((a) => a.id !== id));
@@ -37,7 +51,9 @@ const SavedArticles = ({
   return (
     <div>
       <h2>Bookmarked Articles</h2>
-      {savedArticles.map((article) => (
+      <label htmlFor="serachButton">Search: </label>
+      <input type="text" id="searchButton" onChange={handleSearch} />
+      {search.map((article) => (
         <div key={article.id}>
           <h3>{article.title}</h3>
 
