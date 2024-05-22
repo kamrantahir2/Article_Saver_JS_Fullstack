@@ -2,6 +2,7 @@ import articleService from "../service/articles.js";
 import { useMatch } from "react-router-dom";
 import UpdateArticle from "./UpdateArticle.jsx";
 import { useNavigate } from "react-router-dom";
+import userService from "../service/users.js";
 
 const LoggedInComponents = ({
   articles,
@@ -64,7 +65,11 @@ const Article = ({
   const handleSave = async (id) => {
     try {
       const updatedUser = await articleService.saveArticle(id);
-      setUser(updatedUser);
+
+      userService.getUserById(updatedUser.id).then((response) => {
+        setSavedArticles(response.saved);
+      });
+
       setNotificationMessage(`Article saved`, "success");
     } catch (error) {
       if (error.response.data.error.includes("Token Expired")) {
