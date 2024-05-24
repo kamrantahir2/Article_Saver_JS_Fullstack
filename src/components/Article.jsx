@@ -119,7 +119,7 @@ const Article = ({
         article={article}
         setNotificationMessage={setNotificationMessage}
       />
-      <button onClick={() => handleSave(article.id)}>Save</button>
+      <button onClick={() => handleSave(article.id)}>Bookmark</button>
     </div>
   );
 };
