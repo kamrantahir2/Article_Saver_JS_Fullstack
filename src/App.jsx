@@ -55,10 +55,10 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="font-sans">
       {!user && <NotLoggedInInfo />}
       <Notification message={message} styling={styling} />
-      <div>
+      <div className="p-3 mb-3">
         <Link className="link" to="/">
           All Articles
         </Link>

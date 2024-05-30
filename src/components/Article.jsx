@@ -104,7 +104,12 @@ const Article = ({
 
       <h5>
         URL:{" "}
-        <a href={article.url} rel="noopener" target="_blank">
+        <a
+          className="font-sans"
+          href={article.url}
+          rel="noopener"
+          target="_blank"
+        >
           {article.url}
         </a>
       </h5>
