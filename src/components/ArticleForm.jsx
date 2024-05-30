@@ -13,7 +13,6 @@ const ArticleForm = ({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
-  const [favourite, setFavourite] = useState(false);
 
   const addArticle = async (e) => {
     try {
@@ -22,7 +21,6 @@ const ArticleForm = ({
         title: title,
         description: description,
         url: url,
-        favourite: favourite,
       };
 
       const savedArticle = await articleService.create(newArticle);
@@ -73,24 +71,6 @@ const ArticleForm = ({
         URL:
         <div>
           <input value={url} onChange={(e) => setUrl(e.target.value)} />
-        </div>
-        <div>
-          <p>Favourite:</p>
-          True
-          <input
-            type="radio"
-            name="favourite"
-            value={true}
-            onClick={(e) => setFavourite(true)}
-          />{" "}
-          False
-          <input
-            type="radio"
-            name="favourite"
-            value={false}
-            defaultChecked
-            onClick={(e) => setFavourite(false)}
-          />
         </div>
         <div>
           <button type="submit">Submit</button>

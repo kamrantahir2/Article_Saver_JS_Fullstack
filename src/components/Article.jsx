@@ -109,7 +109,6 @@ const Article = ({
         </a>
       </h5>
       <h5>Description: {article.description}</h5>
-      <h5>Favourite: {article.favourite.toString()}</h5>
       <h5>Saved by: {article.user.username}</h5>
       <LoggedInComponents
         articles={articles}
