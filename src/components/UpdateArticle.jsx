@@ -13,9 +13,7 @@ const UpdateArticle = ({
   const [title, setTitle] = useState(article.title);
   const [description, setDescription] = useState(article.description);
   const [url, setUrl] = useState(article.url);
-  const [favourite, setFavourite] = useState(article.favourite);
   const updatedArticleRef = useRef();
-
   const handleUpdate = async (e, id) => {
     try {
       e.preventDefault();
@@ -24,7 +22,6 @@ const UpdateArticle = ({
         title: title,
         description: description,
         url: url,
-        favourite: favourite,
       };
 
       const returnedArticle = await articleService.update(id, updatedArticle);
@@ -68,24 +65,6 @@ const UpdateArticle = ({
         URL:
         <div>
           <input value={url} onChange={(e) => setUrl(e.target.value)} />
-        </div>
-        <div>
-          <p>Favourite:</p>
-          True
-          <input
-            type="radio"
-            name="favourite"
-            value={true}
-            onClick={(e) => setFavourite(true)}
-          />{" "}
-          False
-          <input
-            type="radio"
-            name="favourite"
-            value={false}
-            defaultChecked
-            onClick={(e) => setFavourite(false)}
-          />
         </div>
         <div>
           <button type="submit">Submit</button>
