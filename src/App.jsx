@@ -31,6 +31,7 @@ function App() {
         setSavedArticles(response.saved);
       });
       setUser(user);
+
       articleService.setToken(user.token);
     }
   }, []);
@@ -87,6 +88,13 @@ function App() {
             Login
           </Link>
         )}
+
+        {user && (
+          <LogoutButton
+            setUser={setUser}
+            setNotificationMessage={setNotificationMessage}
+          />
+        )}
       </div>
 
       <Routes>
@@ -98,6 +106,9 @@ function App() {
               setArticles={setArticles}
               user={user}
               setUser={setUser}
+              setNotificationMessage={setNotificationMessage}
+              savedArticles={savedArticles}
+              setSavedArticles={setSavedArticles}
             />
           }
         />
@@ -171,13 +182,6 @@ function App() {
           }
         />
       </Routes>
-
-      {user && (
-        <LogoutButton
-          setUser={setUser}
-          setNotificationMessage={setNotificationMessage}
-        />
-      )}
     </div>
   );
 }

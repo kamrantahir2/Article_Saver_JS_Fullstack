@@ -11,6 +11,7 @@ const LoggedInComponents = ({
   setUser,
   article,
   setNotificationMessage,
+  children,
 }) => {
   if (user) {
     const handleDelete = async (id) => {
@@ -33,7 +34,7 @@ const LoggedInComponents = ({
     };
 
     return (
-      <div>
+      <div className="flex justify-center space-x-5 mt-4">
         {user.username === article.user.username && (
           <button onClick={() => handleDelete(article.id)}>Delete</button>
         )}
@@ -47,6 +48,7 @@ const LoggedInComponents = ({
             setNotificationMessage={setNotificationMessage}
           />
         )}
+        {children}
       </div>
     );
   }
@@ -63,34 +65,6 @@ const Article = ({
 }) => {
   const navigate = useNavigate();
 
-  const handleSave = async (id) => {
-    try {
-      const foundArticle = savedArticles.find((a) => a.id === id);
-
-      if (!foundArticle) {
-        const updatedUser = await articleService.saveArticle(id);
-
-        userService.getUserById(updatedUser.id).then((response) => {
-          setSavedArticles(response.saved);
-        });
-
-        setNotificationMessage(`Article saved`, "success");
-      } else {
-        setNotificationMessage(`Article has already been bookmarked`, "error");
-      }
-    } catch (error) {
-      if (error.response.data.error.includes("Token Expired")) {
-        window.localStorage.removeItem("loggedArticleAppUser");
-        setUser(null);
-        setNotificationMessage(
-          "Login expired, please log in and try again",
-          "error"
-        );
-        navigate("/login");
-      }
-    }
-  };
-
   const match = useMatch("/articles/:id");
   const article = match ? articles.find((a) => a.id === match.params.id) : null;
 
@@ -99,31 +73,32 @@ const Article = ({
   }
 
   return (
-    <div key={article.id} className="">
-      <h3>{article.title}</h3>
+    <div key={article.id} className="h-screen">
+      <div className="">
+        <h3 className="">{article.title}</h3>
 
-      <h5>
-        URL:{" "}
-        <a
-          className="font-sans"
-          href={article.url}
-          rel="noopener"
-          target="_blank"
-        >
-          {article.url}
-        </a>
-      </h5>
-      <h5>Description: {article.description}</h5>
-      <h5>Saved by: {article.user.username}</h5>
-      <LoggedInComponents
-        articles={articles}
-        setArticles={setArticles}
-        user={user}
-        setUser={setUser}
-        article={article}
-        setNotificationMessage={setNotificationMessage}
-      />
-      <button onClick={() => handleSave(article.id)}>Bookmark</button>
+        <h5>
+          URL:{" "}
+          <a
+            className="font-sans"
+            href={article.url}
+            rel="noopener"
+            target="_blank"
+          >
+            {article.url}
+          </a>
+        </h5>
+        <h5 className="">Description: {article.description}</h5>
+        <h5 className="">Saved by: {article.user.username}</h5>
+        <LoggedInComponents
+          articles={articles}
+          setArticles={setArticles}
+          user={user}
+          setUser={setUser}
+          article={article}
+          setNotificationMessage={setNotificationMessage}
+        ></LoggedInComponents>
+      </div>
     </div>
   );
 };
