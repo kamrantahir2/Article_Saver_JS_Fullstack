@@ -1,6 +1,5 @@
 #root {
   margin: 0 auto;
-
   text-align: center;
 }
 
@@ -54,12 +53,13 @@ button {
 .top-info {
   background-color: black;
   overflow: hidden;
-  position: absolute;
   top: 0;
   width: 100%;
   left: 0;
   right: 0;
   border-bottom: 2px solid blue;
+  position: fixed;
+  margin-bottom: 6rem;
 }
 
 .login-info {

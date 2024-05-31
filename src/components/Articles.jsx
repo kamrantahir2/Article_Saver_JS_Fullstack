@@ -49,18 +49,21 @@ const Articles = ({
             <a href={a.url}>{a.url}</a>
           </div>
 
-          {user.username === a.user.username && (
-            <button onClick={() => navigate(`/articles/${a.id}`)}>Edit</button>
-          )}
-
           {user && (
-            <BookmarkButton
-              id={a.id}
-              savedArticles={savedArticles}
-              setSavedArticles={setSavedArticles}
-              setNotificationMessage={setNotificationMessage}
-              setUser={setUser}
-            />
+            <div>
+              {user.username === a.user.username && (
+                <button onClick={() => navigate(`/articles/${a.id}`)}>
+                  Edit
+                </button>
+              )}
+              <BookmarkButton
+                id={a.id}
+                savedArticles={savedArticles}
+                setSavedArticles={setSavedArticles}
+                setNotificationMessage={setNotificationMessage}
+                setUser={setUser}
+              />
+            </div>
           )}
         </div>
       ))}

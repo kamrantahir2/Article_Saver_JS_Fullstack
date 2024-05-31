@@ -59,7 +59,7 @@ function App() {
     <div className="font-sans  p-6 rounded-lg min-h-screen">
       {!user && <NotLoggedInInfo />}
       <Notification message={message} styling={styling} />
-      <div className="p-3 mb-3">
+      <div className="p-3 mb-3 mt-5">
         <Link className="link" to="/">
           All Articles
         </Link>
