@@ -72,4 +72,5 @@ button:focus-visible {
 
 input {
   color: black;
+  border-radius: 50px;
 }

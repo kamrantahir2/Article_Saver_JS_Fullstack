@@ -36,7 +36,7 @@ const Articles = ({
           type="text"
           id="searchInput"
           onChange={handleSearch}
-          className="text-black rounded-2xl mb-5 w-3/12"
+          className="text-black rounded-2xl mb-5 w-6/12"
           placeholder="Search"
         />
       </div>
@@ -52,7 +52,10 @@ const Articles = ({
           {user && (
             <div>
               {user.username === a.user.username && (
-                <button onClick={() => navigate(`/articles/${a.id}`)}>
+                <button
+                  className="mr-2"
+                  onClick={() => navigate(`/articles/${a.id}`)}
+                >
                   Edit
                 </button>
               )}
