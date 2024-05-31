@@ -29,9 +29,12 @@ const Articles = ({ articles, setArticles, user, setUser, setMessage }) => {
         />
       </div>
       {search.map((a) => (
-        <div key={a.id}>
+        <div
+          key={a.id}
+          className="my-6 border-2 border-black p-9 rounded-2xl shadow-lg bg-blend-darken bg-gray-900"
+        >
           <Link key={a.id} to={`/articles/${a.id}`}>
-            <h3>{a.title}</h3>
+            <h3 className="">{a.title}</h3>
             <h4>Added by {a.user.username}</h4>
           </Link>
         </div>
