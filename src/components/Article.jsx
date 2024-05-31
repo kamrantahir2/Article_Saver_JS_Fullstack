@@ -99,7 +99,7 @@ const Article = ({
   }
 
   return (
-    <div key={article.id}>
+    <div key={article.id} className="">
       <h3>{article.title}</h3>
 
       <h5>
