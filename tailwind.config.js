@@ -2,6 +2,7 @@
 import typography from "@tailwindcss/typography";
 import forms from "@tailwindcss/forms";
 import aspectRatio from "@tailwindcss/aspect-ratio";
+import daisyui from "daisyui";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -9,5 +10,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [typography, forms, aspectRatio],
+  plugins: [typography, forms, aspectRatio, daisyui],
 };

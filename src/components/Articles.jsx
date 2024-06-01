@@ -43,29 +43,36 @@ const Articles = ({
       <h2 className="text-2xl underline mb-3">Articles</h2>
 
       {search.map((a) => (
-        <div key={a.id} className="p-6 md:w-full :bg-white m-auto">
-          <div>
-            <h2>{a.title}</h2>
-            <a href={a.url}>{a.url}</a>
+        <div
+          key={a.id}
+          className="p-6 w-100 bg-base-100 card my-3 glass shadow-xl"
+        >
+          <div className="card-body">
+            <h2 className="card-title">{a.title}</h2>
+            <a className="text-white" href={a.url}>
+              {a.url}
+            </a>
           </div>
 
           {user && (
-            <div>
+            <div className="card-actions justify-center">
               {user.username === a.user.username && (
                 <button
-                  className="mr-2"
+                  className="btn"
                   onClick={() => navigate(`/articles/${a.id}`)}
                 >
                   Edit
                 </button>
               )}
-              <BookmarkButton
-                id={a.id}
-                savedArticles={savedArticles}
-                setSavedArticles={setSavedArticles}
-                setNotificationMessage={setNotificationMessage}
-                setUser={setUser}
-              />
+              <div className="">
+                <BookmarkButton
+                  id={a.id}
+                  savedArticles={savedArticles}
+                  setSavedArticles={setSavedArticles}
+                  setNotificationMessage={setNotificationMessage}
+                  setUser={setUser}
+                />
+              </div>
             </div>
           )}
         </div>

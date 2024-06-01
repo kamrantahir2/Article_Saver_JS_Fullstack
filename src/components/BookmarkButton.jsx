@@ -40,7 +40,7 @@ const BookmarkButton = ({
   };
 
   return (
-    <button className="" onClick={() => handleSave(id)}>
+    <button className="btn" onClick={() => handleSave(id)}>
       Bookmark
     </button>
   );
