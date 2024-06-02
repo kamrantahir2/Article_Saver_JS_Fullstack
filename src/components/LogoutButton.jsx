@@ -11,7 +11,7 @@ const LogoutButton = ({ setUser, setNotificationMessage }) => {
     navigate("/");
   };
   return (
-    <button className="btn" onClick={handleLogout}>
+    <button className="" onClick={handleLogout}>
       Logout
     </button>
   );

@@ -34,7 +34,7 @@ const LoggedInComponents = ({
     };
 
     return (
-      <div className="flex justify-center space-x-5 mt-4">
+      <div className="">
         {user.username === article.user.username && (
           <button onClick={() => handleDelete(article.id)}>Delete</button>
         )}
@@ -63,8 +63,6 @@ const Article = ({
   setSavedArticles,
   savedArticles,
 }) => {
-  const navigate = useNavigate();
-
   const match = useMatch("/articles/:id");
   const article = match ? articles.find((a) => a.id === match.params.id) : null;
 
@@ -73,32 +71,30 @@ const Article = ({
   }
 
   return (
-    <div key={article.id} className="h-screen">
-      <div className="">
-        <h3 className="">{article.title}</h3>
+    <div key={article.id} className="mt-9">
+      <h3 className="text-black text-xl p-4">{article.title}</h3>
 
-        <h5>
-          URL:{" "}
-          <a
-            className="font-sans"
-            href={article.url}
-            rel="noopener"
-            target="_blank"
-          >
-            {article.url}
-          </a>
-        </h5>
-        <h5 className="">Description: {article.description}</h5>
-        <h5 className="">Saved by: {article.user.username}</h5>
-        <LoggedInComponents
-          articles={articles}
-          setArticles={setArticles}
-          user={user}
-          setUser={setUser}
-          article={article}
-          setNotificationMessage={setNotificationMessage}
-        ></LoggedInComponents>
-      </div>
+      <h5 className="p-4 text-lg">
+        <a
+          className="font-sans text-black underline"
+          href={article.url}
+          rel="noopener"
+          target="_blank"
+        >
+          {article.url}
+        </a>
+      </h5>
+      <h5 className="text-black text-lg p-4">
+        Description: {article.description}
+      </h5>
+      <LoggedInComponents
+        articles={articles}
+        setArticles={setArticles}
+        user={user}
+        setUser={setUser}
+        article={article}
+        setNotificationMessage={setNotificationMessage}
+      ></LoggedInComponents>
     </div>
   );
 };

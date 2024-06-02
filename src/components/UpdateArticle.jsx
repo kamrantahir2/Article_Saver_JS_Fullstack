@@ -50,7 +50,12 @@ const UpdateArticle = ({
 
   return (
     <Togglable buttonLabel="Update" ref={updatedArticleRef}>
-      <form onSubmit={(e) => handleUpdate(e, article.id)}>
+      <h3 className="text-black text-xl underline my-6">Update Article</h3>
+
+      <form
+        onSubmit={(e) => handleUpdate(e, article.id)}
+        className="text-black"
+      >
         Title:{" "}
         <div>
           <input value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -67,7 +72,9 @@ const UpdateArticle = ({
           <input value={url} onChange={(e) => setUrl(e.target.value)} />
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button className="text-white my-3" type="submit">
+            Submit
+          </button>
         </div>
       </form>
     </Togglable>
