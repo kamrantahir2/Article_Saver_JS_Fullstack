@@ -81,7 +81,7 @@ function App() {
 
         {user ? (
           <div>
-            <em>{user.name} logged in</em>
+            <em className="text-black">{user.name} logged in</em>
           </div>
         ) : (
           <Link className="link" to="/login">

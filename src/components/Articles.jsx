@@ -50,10 +50,10 @@ const Articles = ({
           className="p-6 w-100 m-auto md:w-6/12 border-b-2  border-black"
         >
           <div className="p-3">
-            <h2 className="text-lg mb-5 text-black underline tracking-tight ">
+            <h2 className="text-xl mb-5 text-black  tracking-tight ">
               {a.title}
             </h2>
-            <a className="text-black " href={a.url}>
+            <a className="text-black underline" href={a.url}>
               {a.url}
             </a>
           </div>
