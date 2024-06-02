@@ -30,7 +30,7 @@ const Articles = ({
   };
 
   return (
-    <div className="mt-16">
+    <div className="">
       <div>
         <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
           <input
@@ -54,20 +54,17 @@ const Articles = ({
           </svg>
         </label>
       </div>
-      <h2 className="text-4xl text-black mt-9 mb-9 underline ">Articles</h2>
 
-      <div className="border-t-2 border-black w-100 md:w-6/12 m-auto"></div>
+      <h2 className="text-4xl text-black mt-9 underline ">Articles</h2>
 
       {search.map((a) => (
-        <div
-          key={a.id}
-          className="p-6 w-100 m-auto md:w-6/12 border-b-2  border-black"
-        >
+        <div key={a.id} className="p-6 w-100 m-auto md:w-6/12 ">
+          {/* <div className="border-t-2 border-black w-6/12 md:w-6/12 m-auto"></div> */}
           <div className="p-3">
-            <h2 className="text-xl mb-5 text-black  tracking-tight ">
+            <h2 className="text-2xl underline mb-5 text-black  tracking-tight ">
               {a.title}
             </h2>
-            <a className="text-black underline" href={a.url}>
+            <a className="text-blue-800 underline" href={a.url}>
               {a.url}
             </a>
           </div>
@@ -93,7 +90,8 @@ const Articles = ({
               </div>
             </div>
           )}
-          {/* <div className="w-6/12 h-1 bg-white rounded-xl m-auto mt-10"></div> */}
+
+          <div className="border-t-2 border-black w-6/12 md:w-6/12 m-auto mt-14"></div>
         </div>
       ))}
     </div>
