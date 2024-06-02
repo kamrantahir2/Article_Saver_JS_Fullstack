@@ -71,3 +71,7 @@ button {
 .close-btn {
   background-color: transparent;
 }
+
+.card-title {
+  text-align: center;
+}

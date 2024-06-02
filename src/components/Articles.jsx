@@ -30,7 +30,7 @@ const Articles = ({
   };
 
   return (
-    <div>
+    <div className="">
       <div>
         <input
           type="text"
@@ -40,25 +40,29 @@ const Articles = ({
           placeholder="Search"
         />
       </div>
-      <h2 className="text-2xl underline mb-3">Articles</h2>
+      <h2 className="text-4xl text-black mt-9 mb-9 underline mb-3">Articles</h2>
+
+      <div className="border-t-2 border-black w-100 md:w-6/12 m-auto"></div>
 
       {search.map((a) => (
         <div
           key={a.id}
-          className="p-6 w-100 bg-base-100 card my-3 glass shadow-xl"
+          className="p-6 w-100 m-auto md:w-6/12 border-b-2  border-black"
         >
-          <div className="card-body">
-            <h2 className="card-title">{a.title}</h2>
-            <a className="text-white" href={a.url}>
+          <div className="p-3">
+            <h2 className="text-lg mb-5 text-black underline tracking-tight ">
+              {a.title}
+            </h2>
+            <a className="text-black " href={a.url}>
               {a.url}
             </a>
           </div>
 
           {user && (
-            <div className="card-actions justify-center">
+            <div className="card-actions  mt-3 justify-center">
               {user.username === a.user.username && (
                 <button
-                  className="btn"
+                  className=""
                   onClick={() => navigate(`/articles/${a.id}`)}
                 >
                   Edit
@@ -75,6 +79,7 @@ const Articles = ({
               </div>
             </div>
           )}
+          {/* <div className="w-6/12 h-1 bg-white rounded-xl m-auto mt-10"></div> */}
         </div>
       ))}
     </div>

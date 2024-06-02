@@ -56,7 +56,7 @@ function App() {
   };
 
   return (
-    <div className="font-sans  p-6 rounded-lg min-h-screen">
+    <div className="font-sans p-6 bg-yellow-50 text-gray-200 rounded-lg min-h-screen">
       {!user && <NotLoggedInInfo />}
       <Notification message={message} styling={styling} />
       <div className="p-3 mb-3 mt-5">
