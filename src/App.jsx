@@ -58,7 +58,7 @@ function App() {
   return (
     <div className="font-sans bg-yellow-50 text-gray-200 rounded-lg min-h-screen">
       {!user && <NotLoggedInInfo />}
-      <Notification message={message} styling={styling} />
+
       <div className="navbar bg-base-300">
         <div className="navbar-start">
           <div className="dropdown">
@@ -83,27 +83,31 @@ function App() {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link className="" to="/">
+                <Link className="text-white" to="/">
                   All Articles
                 </Link>
               </li>
               <li>
-                {user && (
-                  <Link className="" to="/my_articles">
+                {user ? (
+                  <Link className="text-white" to="/my_articles">
                     My Articles
                   </Link>
+                ) : (
+                  <div className="hidden"></div>
                 )}
               </li>
               <li>
-                {user && (
-                  <Link className="" to="/bookmark">
+                {user ? (
+                  <Link className="text-white" to="/bookmark">
                     Bookmark
                   </Link>
+                ) : (
+                  <div className="hidden"></div>
                 )}
               </li>
               <li>
                 {user && (
-                  <Link className="" to="/add_new">
+                  <Link className="text-white" to="/add_new">
                     Add New Article
                   </Link>
                 )}
@@ -111,34 +115,34 @@ function App() {
             </ul>
           </div>
           <div>
-            <Link className="ml-3" to="/">
+            <Link className="ml-3 text-white" to="/">
               Home
             </Link>
           </div>
           <div className="hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <li>
-                <Link className="" to="/">
+                <Link className="text-white" to="/">
                   All Articles
                 </Link>
               </li>
               <li>
                 {user && (
-                  <Link className="" to="/my_articles">
+                  <Link className="text-white" to="/my_articles">
                     My Articles
                   </Link>
                 )}
               </li>
               <li>
                 {user && (
-                  <Link className="" to="/bookmark">
+                  <Link className="text-white" to="/bookmark">
                     Bookmark
                   </Link>
                 )}
               </li>
               <li>
                 {user && (
-                  <Link className="" to="/add_new">
+                  <Link className="text-white" to="/add_new">
                     Add New Article
                   </Link>
                 )}
@@ -153,7 +157,7 @@ function App() {
               <em className="text-white">{user.name} logged in</em>
             </div>
           ) : (
-            <Link className="link" to="/login">
+            <Link className="text-white mr-5" to="/login">
               Login
             </Link>
           )}
@@ -167,6 +171,10 @@ function App() {
             </div>
           )}
         </div>
+      </div>
+
+      <div className="mt-6">
+        <Notification message={message} styling={styling} />
       </div>
 
       <Routes>

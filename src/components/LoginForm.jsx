@@ -32,18 +32,18 @@ const LoginForm = ({ setUser, setNotificationMessage }) => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h4>Log in</h4>
-      <div>
-        <label htmlFor="username">Username: </label>
-        <input
-          type="text"
-          value={username}
-          name="username"
-          onChange={({ target }) => setUsername(target.value)}
-          id="username"
-        />
-      </div>
+    <form className="mt-6" onSubmit={handleLogin}>
+      <h4 className="text-black text-2xl mb-4 underline">Log in</h4>
+
+      <label className="">Username: </label>
+      <input
+        className="inp"
+        type="text"
+        value={username}
+        name="username"
+        onChange={({ target }) => setUsername(target.value)}
+        id="username"
+      />
 
       <div>
         <label htmlFor="password">Password: </label>
@@ -55,6 +55,7 @@ const LoginForm = ({ setUser, setNotificationMessage }) => {
           id="password"
         />
       </div>
+
       <button type="submit">Login</button>
     </form>
   );

@@ -58,8 +58,8 @@ button {
   left: 0;
   right: 0;
   border-bottom: 2px solid blue;
-  position: fixed;
-  margin-bottom: 6rem;
+  /* position: fixed; */
+  /* margin-bottom: 8rem; */
 }
 
 .login-info {

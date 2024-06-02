@@ -32,13 +32,27 @@ const Articles = ({
   return (
     <div className="mt-16">
       <div>
-        <input
-          type="text"
-          id="searchInput"
-          onChange={handleSearch}
-          className="text-black rounded-2xl mb-5 w-6/12"
-          placeholder="Search"
-        />
+        <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+          <input
+            type="text"
+            id="searchInput"
+            onChange={handleSearch}
+            className="text-black rounded-2xl mb-5 w-6/12 grow"
+            placeholder="Search"
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill=""
+            className="w-4 h-4 opacity-70"
+          >
+            <path
+              fillRule="evenodd"
+              d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </label>
       </div>
       <h2 className="text-4xl text-black mt-9 mb-9 underline ">Articles</h2>
 
