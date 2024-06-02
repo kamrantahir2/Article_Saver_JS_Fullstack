@@ -30,7 +30,7 @@ const Articles = ({
   };
 
   return (
-    <div className="">
+    <div className="mt-16">
       <div>
         <input
           type="text"
@@ -40,7 +40,7 @@ const Articles = ({
           placeholder="Search"
         />
       </div>
-      <h2 className="text-4xl text-black mt-9 mb-9 underline mb-3">Articles</h2>
+      <h2 className="text-4xl text-black mt-9 mb-9 underline ">Articles</h2>
 
       <div className="border-t-2 border-black w-100 md:w-6/12 m-auto"></div>
 
