@@ -55,11 +55,10 @@ const Articles = ({
         </label>
       </div>
 
-      <h2 className="text-4xl text-black mt-9 underline ">Articles</h2>
+      <h2 className="text-3xl text-black mt-9 underline ">Articles</h2>
 
       {search.map((a) => (
         <div key={a.id} className="p-6 w-100 m-auto md:w-6/12 ">
-          {/* <div className="border-t-2 border-black w-6/12 md:w-6/12 m-auto"></div> */}
           <div className="p-3">
             <h2 className="text-2xl underline mb-5 text-black  tracking-tight ">
               {a.title}
@@ -67,6 +66,7 @@ const Articles = ({
             <a className="text-blue-800 underline" href={a.url}>
               {a.url}
             </a>
+            <h2 className="text-black mt-3">Description: {a.description}</h2>
           </div>
 
           {user && (
