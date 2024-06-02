@@ -13,7 +13,8 @@ import NotLoggedInInfo from "./components/NotLoggedInInfo.jsx";
 import MyArticles from "./components/MyArticles.jsx";
 import SavedArticles from "./components/SavedArticles.jsx";
 import usersService from "./service/users.js";
-// import SavedArticle from "./components/SavedArticle.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -116,7 +117,7 @@ function App() {
           </div>
           <div>
             <Link className="ml-3 text-white" to="/">
-              Home
+              <FontAwesomeIcon icon={faHouse} />
             </Link>
           </div>
           <div className="hidden lg:flex">
@@ -189,6 +190,7 @@ function App() {
               setNotificationMessage={setNotificationMessage}
               savedArticles={savedArticles}
               setSavedArticles={setSavedArticles}
+              title="All Articles"
             />
           }
         />
@@ -245,6 +247,10 @@ function App() {
               setArticles={setArticles}
               user={user}
               setUser={setUser}
+              savedArticles={savedArticles}
+              setSavedArticles={setSavedArticles}
+              setNotificationMessage={setNotificationMessage}
+              title="My Articles"
             />
           }
         />

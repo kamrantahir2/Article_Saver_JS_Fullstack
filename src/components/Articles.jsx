@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 import { useNavigate } from "react-router-dom";
 import BookmarkButton from "./BookmarkButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 const Articles = ({
   articles,
@@ -12,6 +14,7 @@ const Articles = ({
   setNotificationMessage,
   savedArticles,
   setSavedArticles,
+  title,
 }) => {
   const [search, setSearch] = useState(articles);
 
@@ -55,7 +58,7 @@ const Articles = ({
         </label>
       </div>
 
-      <h2 className="text-3xl text-black mt-9 underline ">Articles</h2>
+      <h2 className="text-3xl text-black mt-9 underline ">{title}</h2>
 
       {search.map((a) => (
         <div key={a.id} className="p-6 w-100 m-auto md:w-6/12 ">
@@ -76,7 +79,10 @@ const Articles = ({
                   className=""
                   onClick={() => navigate(`/articles/${a.id}`)}
                 >
-                  Edit
+                  <FontAwesomeIcon
+                    icon={faPenToSquare}
+                    className="text-white"
+                  />
                 </button>
               )}
               <div className="">

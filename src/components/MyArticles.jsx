@@ -1,6 +1,15 @@
 import Articles from "./Articles";
 
-const MyArticles = ({ articles, setArticles, user, setUser }) => {
+const MyArticles = ({
+  articles,
+  setArticles,
+  user,
+  setUser,
+  savedArticles,
+  setSavedArticles,
+  setNotificationMessage,
+  title,
+}) => {
   const myArticles = articles.filter((a) => a.user.username === user.username);
 
   return (
@@ -9,6 +18,10 @@ const MyArticles = ({ articles, setArticles, user, setUser }) => {
       setArticles={setArticles}
       user={user}
       setUser={setUser}
+      savedArticles={savedArticles}
+      setSavedArticles={setSavedArticles}
+      setNotificationMessage={setNotificationMessage}
+      title={title}
     />
   );
 };

@@ -2,6 +2,8 @@ import articleService from "../service/articles.js";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import userService from "../service/users.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const SavedArticles = ({
   savedArticles,
@@ -93,7 +95,7 @@ const SavedArticles = ({
             className="text-white"
             onClick={() => handleRemove(article.id)}
           >
-            Remove
+            <FontAwesomeIcon icon={faTrashCan} />
           </button>
           <div className="border-t-2 mt-8 border-black w-100 md:w-6/12 m-auto"></div>
         </div>

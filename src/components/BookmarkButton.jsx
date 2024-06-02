@@ -1,6 +1,8 @@
 import articleService from "../service/articles.js";
 import userService from "../service/users.js";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 const BookmarkButton = ({
   id,
@@ -27,6 +29,7 @@ const BookmarkButton = ({
         setNotificationMessage(`Article has already been bookmarked`, "error");
       }
     } catch (error) {
+      console.log(error);
       if (error.response.data.error.includes("Token Expired")) {
         window.localStorage.removeItem("loggedArticleAppUser");
         setUser(null);
@@ -41,7 +44,7 @@ const BookmarkButton = ({
 
   return (
     <button className="" onClick={() => handleSave(id)}>
-      Bookmark
+      <FontAwesomeIcon icon={faBookmark} className="text-white" />
     </button>
   );
 };
