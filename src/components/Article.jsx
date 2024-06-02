@@ -71,8 +71,8 @@ const Article = ({
   }
 
   return (
-    <div key={article.id} className="mt-9">
-      <h3 className="text-black text-xl p-4">{article.title}</h3>
+    <div key={article.id} className="mt-16">
+      <h3 className="text-black text-2xl underline p-4">{article.title}</h3>
 
       <h5 className="p-4 text-lg">
         <a

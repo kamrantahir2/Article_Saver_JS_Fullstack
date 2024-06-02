@@ -56,45 +56,117 @@ function App() {
   };
 
   return (
-    <div className="font-sans p-6 bg-yellow-50 text-gray-200 rounded-lg min-h-screen">
+    <div className="font-sans bg-yellow-50 text-gray-200 rounded-lg min-h-screen">
       {!user && <NotLoggedInInfo />}
       <Notification message={message} styling={styling} />
-      <div className="p-3 mb-3 mt-5">
-        <Link className="link" to="/">
-          All Articles
-        </Link>
-        {user && (
-          <Link className="link" to="/my_articles">
-            My Articles
-          </Link>
-        )}
-        {user && (
-          <Link className="link" to="/bookmark">
-            Bookmark
-          </Link>
-        )}
-        {user && (
-          <Link className="link" to="/add_new">
-            Add New Article
-          </Link>
-        )}
-
-        {user ? (
-          <div>
-            <em className="text-black">{user.name} logged in</em>
+      <div className="navbar bg-base-300">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <Link className="" to="/">
+                  All Articles
+                </Link>
+              </li>
+              <li>
+                {user && (
+                  <Link className="" to="/my_articles">
+                    My Articles
+                  </Link>
+                )}
+              </li>
+              <li>
+                {user && (
+                  <Link className="" to="/bookmark">
+                    Bookmark
+                  </Link>
+                )}
+              </li>
+              <li>
+                {user && (
+                  <Link className="" to="/add_new">
+                    Add New Article
+                  </Link>
+                )}
+              </li>
+            </ul>
           </div>
-        ) : (
-          <Link className="link" to="/login">
-            Login
-          </Link>
-        )}
+          <div>
+            <Link className="ml-3" to="/">
+              Home
+            </Link>
+          </div>
+          <div className="hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">
+              <li>
+                <Link className="" to="/">
+                  All Articles
+                </Link>
+              </li>
+              <li>
+                {user && (
+                  <Link className="" to="/my_articles">
+                    My Articles
+                  </Link>
+                )}
+              </li>
+              <li>
+                {user && (
+                  <Link className="" to="/bookmark">
+                    Bookmark
+                  </Link>
+                )}
+              </li>
+              <li>
+                {user && (
+                  <Link className="" to="/add_new">
+                    Add New Article
+                  </Link>
+                )}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="navbar-center hidden lg:flex"></div>
+        <div className="navbar-end">
+          {user ? (
+            <div>
+              <em className="text-white">{user.name} logged in</em>
+            </div>
+          ) : (
+            <Link className="link" to="/login">
+              Login
+            </Link>
+          )}
 
-        {user && (
-          <LogoutButton
-            setUser={setUser}
-            setNotificationMessage={setNotificationMessage}
-          />
-        )}
+          {user && (
+            <div className="ml-3">
+              <LogoutButton
+                setUser={setUser}
+                setNotificationMessage={setNotificationMessage}
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       <Routes>
