@@ -73,7 +73,11 @@ const SavedArticles = ({
       </label>
       <h2 className="text-2xl my-6 underline">Bookmarked Articles</h2>
 
-      <div className="border-t-2 mt-8 border-black w-100 md:w-6/12 m-auto"></div>
+      <div className="border-t-2 border-black w-6/12 md:w-6/12 m-auto mt-14"></div>
+
+      {savedArticles.length === 0 && (
+        <h2 className="mt-5 text-lg text-cyan-800">No bookmarked articles</h2>
+      )}
 
       {search.map((article) => (
         <div key={article.id}>
@@ -94,7 +98,7 @@ const SavedArticles = ({
           <div className="border-t-2 mt-8 border-black w-100 md:w-6/12 m-auto"></div>
         </div>
       ))}
-      <div className="border-t-2 mt-8 border-black w-100 md:w-6/12 m-auto"></div>
+      <div className="border-t-2 border-black w-6/12 md:w-6/12 m-auto mt-14"></div>
     </div>
   );
 };
