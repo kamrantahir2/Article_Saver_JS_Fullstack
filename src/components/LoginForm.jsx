@@ -36,7 +36,7 @@ const LoginForm = ({ setUser, setNotificationMessage }) => {
       <h4 className="text-black text-2xl mb-6 underline">Log in</h4>
 
       <div>
-        <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+        <label className="input input-ghost w-9/12 lg:w-5/12 m-auto bg-transparent flex items-center gap-2">
           <input
             className="grow text-black rounded-2xl mb-5 w-6/12"
             type="text"
@@ -57,7 +57,7 @@ const LoginForm = ({ setUser, setNotificationMessage }) => {
       </div>
 
       <div>
-        <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+        <label className="input input-ghost w-9/12 lg:w-5/12 m-auto bg-transparent flex items-center gap-2">
           <input
             className="grow text-black rounded-2xl mb-5 w-6/12"
             type="password"
@@ -82,7 +82,10 @@ const LoginForm = ({ setUser, setNotificationMessage }) => {
         </label>
       </div>
 
-      <button className="mt-4 mb-2" type="submit">
+      <button
+        className="mt-4 mb-2 w-9/12 lg:w-5/12 hover:bg-gray-800"
+        type="submit"
+      >
         Login
       </button>
     </form>

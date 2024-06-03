@@ -59,7 +59,7 @@ const UpdateArticle = ({
         className="text-black"
       >
         <div>
-          <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+          <label className="input input-ghost w-9/12 lg:w-5/12 m-auto bg-transparent flex items-center gap-2">
             <input
               className="grow text-black rounded-2xl mb-5 w-6/12"
               type="text"
@@ -71,7 +71,7 @@ const UpdateArticle = ({
           </label>
         </div>
         <div>
-          <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+          <label className="input input-ghost w-9/12 lg:w-5/12 m-auto bg-transparent flex items-center gap-2">
             <input
               className="grow text-black rounded-2xl mb-5 w-6/12"
               type="text"
@@ -83,7 +83,7 @@ const UpdateArticle = ({
           </label>
         </div>
         <div>
-          <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+          <label className="input input-ghost w-9/12 lg:w-5/12 m-auto bg-transparent flex items-center gap-2">
             <input
               className="grow text-black rounded-2xl mb-5 w-6/12"
               type="text"
@@ -95,7 +95,10 @@ const UpdateArticle = ({
           </label>
         </div>
         <div>
-          <button className="text-white my-3" type="submit">
+          <button
+            className="text-white my-3 w-9/12 lg:w-5/12 hover:bg-gray-800"
+            type="submit"
+          >
             Submit
           </button>
         </div>
