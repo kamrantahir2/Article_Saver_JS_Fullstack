@@ -60,7 +60,7 @@ const ArticleForm = ({
       <h2 className="text-black text-2xl underline mb-5">Add article</h2>
       <form onSubmit={addArticle}>
         <div>
-          <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+          <label className="input input-ghost w-9/12 lg:w-5/12 m-auto bg-transparent flex items-center gap-2">
             <input
               className="grow text-black rounded-2xl mb-5 w-6/12"
               type="text"
@@ -72,7 +72,7 @@ const ArticleForm = ({
           </label>
         </div>
         <div>
-          <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+          <label className="input input-ghost w-9/12 lg:w-5/12 m-auto bg-transparent flex items-center gap-2">
             <input
               className="grow text-black rounded-2xl mb-5 w-6/12"
               type="text"
@@ -84,7 +84,7 @@ const ArticleForm = ({
           </label>
         </div>
         <div>
-          <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+          <label className="input input-ghost w-9/12 lg:w-5/12 m-auto bg-transparent flex items-center gap-2">
             <input
               className="grow text-black rounded-2xl mb-5 w-6/12"
               type="text"
@@ -97,7 +97,10 @@ const ArticleForm = ({
         </div>
 
         <div>
-          <button className="mt-5" type="submit">
+          <button
+            className="mt-5 w-9/12 lg:w-5/12 hover:bg-gray-800 "
+            type="submit"
+          >
             Submit
           </button>
         </div>

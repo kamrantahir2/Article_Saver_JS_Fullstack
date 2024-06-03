@@ -73,7 +73,7 @@ const SavedArticles = ({
           />
         </svg>
       </label>
-      <h2 className="text-2xl my-6 underline">Bookmarked Articles</h2>
+      <h2 className="text-3xl my-6 underline">Bookmarked Articles</h2>
 
       <div className="border-t-2 border-black w-6/12 md:w-6/12 m-auto mt-14"></div>
 
