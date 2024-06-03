@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import Togglable from "./Togglable";
 import articleService from "../service/articles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faLink, faBook } from "@fortawesome/free-solid-svg-icons";
 
 const UpdateArticle = ({
   article,
@@ -56,20 +58,41 @@ const UpdateArticle = ({
         onSubmit={(e) => handleUpdate(e, article.id)}
         className="text-black"
       >
-        Title:{" "}
         <div>
-          <input value={title} onChange={(e) => setTitle(e.target.value)} />
+          <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+            <input
+              className="grow text-black rounded-2xl mb-5 w-6/12"
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <FontAwesomeIcon icon={faPen} className="text-black" />
+          </label>
         </div>
-        Description:{" "}
         <div>
-          <input
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+          <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+            <input
+              className="grow text-black rounded-2xl mb-5 w-6/12"
+              type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              placeholder="URL"
+            />
+            <FontAwesomeIcon icon={faLink} className="text-black" />
+          </label>
         </div>
-        URL:
         <div>
-          <input value={url} onChange={(e) => setUrl(e.target.value)} />
+          <label className="input input-ghost w-9/12 m-auto bg-transparent flex items-center gap-2">
+            <input
+              className="grow text-black rounded-2xl mb-5 w-6/12"
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Description"
+            />
+            <FontAwesomeIcon icon={faBook} className="text-black" />
+          </label>
         </div>
         <div>
           <button className="text-white my-3" type="submit">

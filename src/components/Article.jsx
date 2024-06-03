@@ -36,7 +36,9 @@ const LoggedInComponents = ({
     return (
       <div className="">
         {user.username === article.user.username && (
-          <button onClick={() => handleDelete(article.id)}>Delete</button>
+          <button className="my-3" onClick={() => handleDelete(article.id)}>
+            Delete
+          </button>
         )}
         {user.username === article.user.username && (
           <UpdateArticle

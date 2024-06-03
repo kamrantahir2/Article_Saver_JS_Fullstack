@@ -59,118 +59,123 @@ function App() {
   return (
     <div className="font-sans bg-yellow-50 text-gray-200 rounded-lg min-h-screen">
       {!user && <NotLoggedInInfo />}
-
-      <div className="navbar bg-base-300">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+      <div className="sticky top-0">
+        <div className="navbar bg-base-300 border-b-2 border-cyan-200">
+          <div className="navbar-start">
+            <div className="dropdown">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost lg:hidden"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+                </svg>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <Link className="text-white" to="/">
+                    All Articles
+                  </Link>
+                </li>
+                <li>
+                  {user ? (
+                    <Link className="text-white" to="/my_articles">
+                      My Articles
+                    </Link>
+                  ) : (
+                    <div className="hidden"></div>
+                  )}
+                </li>
+                <li>
+                  {user ? (
+                    <Link className="text-white" to="/bookmark">
+                      Bookmark
+                    </Link>
+                  ) : (
+                    <div className="hidden"></div>
+                  )}
+                </li>
+                <li>
+                  {user && (
+                    <Link className="text-white" to="/add_new">
+                      Add New Article
+                    </Link>
+                  )}
+                </li>
+              </ul>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <Link className="text-white" to="/">
-                  All Articles
-                </Link>
-              </li>
-              <li>
-                {user ? (
-                  <Link className="text-white" to="/my_articles">
-                    My Articles
-                  </Link>
-                ) : (
-                  <div className="hidden"></div>
-                )}
-              </li>
-              <li>
-                {user ? (
-                  <Link className="text-white" to="/bookmark">
-                    Bookmark
-                  </Link>
-                ) : (
-                  <div className="hidden"></div>
-                )}
-              </li>
-              <li>
-                {user && (
-                  <Link className="text-white" to="/add_new">
-                    Add New Article
-                  </Link>
-                )}
-              </li>
-            </ul>
-          </div>
-          <div>
-            <Link className="ml-3 text-white" to="/">
-              <FontAwesomeIcon icon={faHouse} />
-            </Link>
-          </div>
-          <div className="hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
-              <li>
-                <Link className="text-white" to="/">
-                  All Articles
-                </Link>
-              </li>
-              <li>
-                {user && (
-                  <Link className="text-white" to="/my_articles">
-                    My Articles
-                  </Link>
-                )}
-              </li>
-              <li>
-                {user && (
-                  <Link className="text-white" to="/bookmark">
-                    Bookmark
-                  </Link>
-                )}
-              </li>
-              <li>
-                {user && (
-                  <Link className="text-white" to="/add_new">
-                    Add New Article
-                  </Link>
-                )}
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="navbar-center hidden lg:flex"></div>
-        <div className="navbar-end">
-          {user ? (
             <div>
-              <em className="text-white">{user.name} logged in</em>
+              <Link className="ml-3 text-white" to="/">
+                <FontAwesomeIcon icon={faHouse} />
+              </Link>
             </div>
-          ) : (
-            <Link className="text-white mr-5" to="/login">
-              Login
-            </Link>
-          )}
+            <div className="hidden lg:flex">
+              <ul className="menu menu-horizontal px-1">
+                <li>
+                  <Link className="text-white" to="/">
+                    All Articles
+                  </Link>
+                </li>
+                <li>
+                  {user && (
+                    <Link className="text-white" to="/my_articles">
+                      My Articles
+                    </Link>
+                  )}
+                </li>
+                <li>
+                  {user && (
+                    <Link className="text-white" to="/bookmark">
+                      Bookmark
+                    </Link>
+                  )}
+                </li>
+                <li>
+                  {user && (
+                    <Link className="text-white" to="/add_new">
+                      Add New Article
+                    </Link>
+                  )}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="navbar-center hidden lg:flex"></div>
+          <div className="navbar-end">
+            {user ? (
+              <div>
+                <em className="text-white">{user.name} logged in</em>
+              </div>
+            ) : (
+              <Link className="text-white mr-5" to="/login">
+                Login
+              </Link>
+            )}
 
-          {user && (
-            <div className="ml-3">
-              <LogoutButton
-                setUser={setUser}
-                setNotificationMessage={setNotificationMessage}
-              />
-            </div>
-          )}
+            {user && (
+              <div className="ml-3">
+                <LogoutButton
+                  setUser={setUser}
+                  setNotificationMessage={setNotificationMessage}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

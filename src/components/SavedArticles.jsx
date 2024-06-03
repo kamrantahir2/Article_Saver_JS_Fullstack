@@ -97,10 +97,9 @@ const SavedArticles = ({
           >
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
-          <div className="border-t-2 mt-8 border-black w-100 md:w-6/12 m-auto"></div>
+          <div className="border-t-2 mt-8 border-black w-6/12 md:w-6/12 m-auto"></div>
         </div>
       ))}
-      <div className="border-t-2 border-black w-6/12 md:w-6/12 m-auto mt-14"></div>
     </div>
   );
 };
