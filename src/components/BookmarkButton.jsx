@@ -15,6 +15,8 @@ const BookmarkButton = ({
 
   const handleSave = async (id) => {
     try {
+      await articleService.verifyUser();
+
       const foundArticle = savedArticles.find((a) => a.id === id);
 
       if (!foundArticle) {

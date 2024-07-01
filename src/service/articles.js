@@ -35,6 +35,11 @@ const update = (id, newObject) => {
   return request.then((response) => response.data);
 };
 
+const verifyUser = () => {
+  const request = axios.post(`${baseUrl}/verify`, {}, config());
+  return request.then((response) => response.data);
+};
+
 const deleteArticle = (id) => {
   const request = axios.delete(`${baseUrl}/${id}`, config());
   return request.then((response) => response.data);
@@ -59,4 +64,5 @@ export default {
   getById,
   saveArticle,
   unsaveArticle,
+  verifyUser,
 };

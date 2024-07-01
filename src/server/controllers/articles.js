@@ -150,6 +150,18 @@ articlesRouter.post("/saveArticle/:id", async (request, response, next) => {
   }
 });
 
+articlesRouter.post("/verify", async (request, response, next) => {
+  try {
+    const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+    if (!decodedToken.id) {
+      return response.status(401).json({ error: "token invalid" });
+    }
+    response.json({ message: "User Verified" });
+  } catch (error) {
+    next(error);
+  }
+});
+
 articlesRouter.put("/unsaveArticle/:id", async (request, response, next) => {
   try {
     const articleId = request.params.id;
